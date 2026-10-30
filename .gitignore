@@ -1,0 +1,17 @@
+# Builds and environments
+build/
+build_*/
+.venv/
+__pycache__/
+*.pyc
+
+# Logs and editor/OS files
+*.log
+.DS_Store
+.vscode/
+*.code-workspace
+
+# Secrets: never commit these
+.env
+*secret*
+*.key
