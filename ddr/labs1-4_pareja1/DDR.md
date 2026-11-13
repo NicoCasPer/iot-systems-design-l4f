@@ -7,7 +7,7 @@
 
 > Labs 1–4 are done in pairs. From Lab 5 on, this pair and Pair 2 work as one team: see [the team DDR](../labs5-8_equipo/DDR.md).
 >
-> **Sources.** Every number below comes from our lab reports (Labs 1–4, 22–23 Oct 2026), from the console photos in [`img/lab4/`](img/lab4/), or, where stated, from the course firmware. Anything we did not measure is marked **not measured** instead of estimated.
+> **Sources.** Every number below comes from our lab reports (Labs 1–4, 22–23 Oct 2026), from the console photos in [`img/lab4/`](img/lab4/), or, where stated, from the course firmware. Original experimental values are retained. Additions distinguish **measured**, **calculated** (from recorded data and stated assumptions), **firmware-derived** (expected behavior), and **not measured** (missing experimental evidence). No simulated results are presented as measurements. The completion review uses the supplied `labs/lab1.md`–`lab4.md`, `firmware/lab1_radio`, `lab2_mesh`, `lab3_coap` and `lab4_sensors` sources; see §6.1–§6.4 for calculations, provenance and remaining evidence.
 
 ---
 
@@ -55,15 +55,15 @@ RSSI traffic light: **green** ≥ −80 dBm, LQ 2–3 · **yellow** −80 to −
 *   **To Samuel:** Cost per hop, as a hypothesis: RTT was **16.0 ms** to the board one hop away and **≈32 ms** to the others, which fits ≈16 ms per hop but does not prove the route (`hlim` does not count mesh hops). B joined as child in 27.8 s and became router **5.985 s** later; A became leader in 14.5 s. Applications must address nodes by their **ML-EID**: it is stable for the node's lifetime in the network, while the RLOC encodes the parent/router and changes when the topology does.
 
 ### Lab 3: Thread & CoAP
-*   **To Daniela (Customer):** The node no longer has to be asked over and over. With **Observe**, the client subscribed once and S sent **34 updates in about 5½ minutes**, only when the temperature changed by more than the threshold (23.43–25.22 °C); C sent no further requests. Each update is a 19-byte CoAP message. Fewer messages means less radio time, and the radio is what drains the batteries. A valve that sleeps between checks saves more energy but reacts later: **0.5 s on average with a 1 s check period, 3.3 s with 5 s, 7.6 s with 15 s** (we did not measure the battery saving itself).
+*   **To Daniela (Customer):** The node no longer has to be asked over and over. With **Observe**, the client subscribed once and S sent **34 updates in about 5½ minutes**, on temperature changes greater than the threshold (23.43–25.22 °C); C sent no further requests. Each recorded update is a 19-byte CoAP message. Against the exercise's 1 Hz GET baseline, this removes about 330 periodic requests over the same window; battery saving itself was not measured. A valve that sleeps between checks saves more energy but reacts later: **0.5 s on average with a 1 s check period, 3.3 s with 5 s, 7.6 s with 15 s** (we did not measure the battery saving itself).
 *   **To Edwin:** A command is **confirmed** when it is sent as CON: the valve answers `2.04 Changed` with its new state (`{"v":1}` / `{"v":0}`), and a `GET` returns `2.05` with the current state. Invalid commands are rejected with `4.00 Bad Request`. When the valve is unreachable, a CON command ends in `ResponseTimeout` (error 28) after **69.4 s** (stopwatch); a NON command just says `Done` and gives no way to know if it arrived. Latency to expect from a sleepy valve is roughly the poll period: up to **≈5 s with a 5 s poll** (worst ping 4,988 ms).
 
 ### Lab 4: Real Sensors
 *   **To Edwin:** A **dead sensor** and a **dead node** look different:
-    *   **Dead sensor:** the node keeps answering. Its firmware declared `Sensor lost: 3 failed reads in a row` **5.2 s after the last good reading** (one read every 2 s), and from then on `/env/temp` stops serving the old value: per the course firmware, GET answers `5.03` once no reading is younger than 60 s. When the probe came back, S logged `Sensor back after 12 failed reads` (20.8 s after "lost").
+    *   **Dead sensor:** the node keeps answering. Its firmware declared `Sensor lost: 3 failed reads in a row` **5.2 s after the last good reading** (one read every 2 s), but this log does not immediately invalidate the cached value: per the course firmware, GET answers `5.03` once no accepted reading is younger than 60 s. When the probe came back, S logged `Sensor back after 12 failed reads` (20.8 s after "lost").
     *   **Dead node:** there is no answer at all. The client only finds out when its request times out (**69.4 s** for a CON request, measured in Lab 3).
 
-    We did not capture the 5.03 at the client, so the time for a client to see a lost sensor is bounded by the 60 s Max-Age, not measured.
+    Client-side `5.03` was not captured. The recorded recovery was only **26.0 s after the last good reading**, before the 60 s freshness limit, so this outage does not demonstrate the expired-data path. The firmware sends a terminating `5.03` notification when a previously fresh reading expires; actual client reception time remains unmeasured (§6.2).
 
 ---
 
@@ -101,7 +101,7 @@ RSSI traffic light: **green** ≥ −80 dBm, LQ 2–3 · **yellow** −80 to −
 **ADR-004: Poll period for battery-powered valves**
 *   **Context:** A sleepy end device (SED) only receives when it polls its parent, so the poll period trades latency for radio-on time.
 *   **Decision:** **5 s** poll period for valve nodes.
-*   **Rationale:** Measured with S as SED (10 pings per condition, ICMP): 1 s → 529.8 ms average, 40 % loss; **5 s → 3,267 ms average, max 4,988 ms, 10 % loss**; 15 s → 7,642 ms average, max 13,368 ms. 5 s keeps the worst case under the 5 s target for an irrigation command while polling 5× less often than 1 s. The loss figures are not conclusive (10 pings, S changed role during the series). **Energy estimate: not computed yet** — see §6.
+*   **Rationale:** Measured with S as SED (10 pings per condition, ICMP): 1 s → 529.8 ms average, 40 % loss; **5 s → 3,267 ms average, max 4,988 ms, 10 % loss**; 15 s → 7,642 ms average, max 13,368 ms. The maximum observed successful ICMP reply at 5 s was below 5 s, while polling was 5× less frequent than at 1 s; this is not a guaranteed command deadline, particularly with one missing reply. The loss figures are not conclusive (10 pings, S changed role during the series). **Calculated polling-only energy model:** 0.2 % radio-on fraction at 5 s; idealized average 0.155 mA using the guide's two-state model. This does not establish board autonomy — see §6.1.
 *   **Status:** [x] Proposed | [ ] Accepted | [ ] Deprecated
 
 ---
@@ -128,7 +128,7 @@ RSSI traffic light: **green** ≥ −80 dBm, LQ 2–3 · **yellow** −80 to −
 
 | Resource | Method | Success | Errors |
 |---|---|---|---|
-| `/env/temp` | GET, GET + Observe | `2.05 Content`, CBOR `{"t": float16}`; notifications on change ≥ 0.5 °C or every 45 s (heartbeat); **Max-Age 60** (Lab 4) | `5.03` when no reading is younger than 60 s (Lab 4) |
+| `/env/temp` | GET, GET + Observe | `2.05 Content`, CBOR `{"t": float16}`; notifications on change > 0.5 °C (NON) or after 45 s without notification (CON heartbeat); **Max-Age counts down from 60 s** (Lab 4) | `5.03`, text `no fresh reading`, Max-Age 10 when no reading is younger than 60 s; expiry ends existing observations (Lab 4) |
 | `/act/valve` | PUT (CON) | `2.04 Changed`, CBOR `{"v": 0\|1}`; idempotent (`OPEN, no change -> 2.04`) | `4.00` if payload is not `{"v": 0\|1}` or `"0"`/`"1"` |
 | `/act/valve` | GET | `2.05 Content`, CBOR `{"v": 0\|1}` | — |
 
@@ -137,7 +137,7 @@ env-temp = { "t": float16 }      ; °C, e.g. a1 61 74 f9 4e33 = {"t": 24.80}
 valve    = { "v": 0 / 1 }        ; 1 = open, 0 = closed
 ```
 
-Threshold (0.5 °C), heartbeat (45 s) and Max-Age (60 s) are the values in the course firmware (`lab4_sensors/src/env_temp.c`); Max-Age 60 also appears in our Lab 4 log.
+Threshold (> 0.5 °C), heartbeat (45 s), freshness limit (60 s) and error retry Max-Age (10 s) are the values in `lab4_sensors/src/env_temp.c`; Max-Age 60 also appears in our Lab 4 log. After expiry, observations end and must be registered again after recovery. `reading.c` samples every 2 s, accepts −40 ≤ T < 85 °C, and rejects a step > 5 °C only when the previous accepted reading is less than 10 s old. Three consecutive driver failures produce the lost-sensor log; they do not directly clear the last accepted reading.
 
 **IPv6 address classification (Lab 2):**
 
@@ -182,7 +182,7 @@ Wi-Fi and BLE stay latent: they share the 2.4 GHz front end with 802.15.4, Wi-Fi
 
 **Lab 3:**
 1. **Why can CoAP use UDP where HTTP needs TCP? What do CON and NON give and give up?** CoAP brings its own minimal reliability per message (Message ID, ACK, exponential retransmission), so it does not need TCP's connection, handshake and stream state, which are expensive on a lossy, sleepy link. **CON** gives an end-to-end confirmation and a definite failure (we saw `ResponseTimeout` after 69.4 s). **NON** gives that up for one message and no waiting: our NON PUT only returned `Done`, with no way to know if it arrived.
-2. **Why does Observe save battery compared with a GET every 60 s?** The server knows when the value changed, so it sends only then (34 notifications in 5½ min, none redundant). With periodic GETs, the client wakes up and transmits a request every time and the node must answer even when nothing changed, and changes between polls are missed. The radio of the battery node pays in both cases, but with Observe it only transmits when there is something new.
+2. **Why does Observe save battery compared with a GET every 60 s?** The server knows when the value changed, so it sends only then (34 notifications in 5½ min, none redundant). Periodic GETs require a request and response even when the value is unchanged, and changes between polls are missed. However, our 34 updates do not demonstrate an energy saving against a GET every 60 s: that baseline would produce only about 5–6 exchanges in this window. Against the task's 1 Hz baseline, about 330 GETs would be sent in 5½ min, versus one subscription and 34 observed updates. This is a message-count comparison, not a measured energy saving; heartbeat traffic, acknowledgements and retries also matter.
 3. **Why did the sleepy valve receive the same PUT twice, and why was that harmless? What about a "toggle" command?** We saw `OPEN, no change -> 2.04` once with a 5 s poll but **could not show two receptions of the same Message ID** (inconclusive). The mechanism: the client retransmits a CON when its ACK does not arrive in time, and with a long poll the request can be delivered twice. It is harmless because "set v=1" is **idempotent**. A "toggle" command would flip the valve twice and leave it in the wrong state.
 4. **Why CBOR and not a hand-made binary struct?** CBOR is self-describing (keys and types travel with the data), standard (RFC 8949), and has libraries everywhere, so any client can decode `a1 61 74 f9 …` as `{"t": 24.8}` without our C header. It stays compact (6 bytes here), and fields can be added without breaking old clients. A packed struct is equally small but breaks on endianness, padding and any version change.
 
@@ -201,8 +201,8 @@ Wi-Fi and BLE stay latent: they share the 2.4 GHz front end with 802.15.4, Wi-Fi
 | Lab 1: Max Range | > 20m | **≈5 m** (0 % loss); 10 m: 35–56 % loss | [ ] Pass — fails; setup suspected (≈52 dB excess loss) |
 | Lab 2: Healing Time | < 120s | **not measured** (no timestamp of B's removal) | [ ] Pass — not verified |
 | Lab 3: CoAP Latency | < 200ms | **not measured** (no CoAP RTT recorded; ICMP RTT 14 ms in Lab 1, 16–32 ms in Lab 2) | [ ] Pass — not verified |
-| Lab 3: Poll Latency (5 s period) | < 5s | **3.27 s** average, 4.99 s max (ICMP, 9/10 replies) | [x] Pass |
-| Lab 4: Time to see a lost sensor | ≤ 60s | **5.2 s** to `Sensor lost` in the node log; client-side 5.03 not captured | [x] Pass (node side) |
+| Lab 3: Poll Latency (5 s period) | < 5s | **3.27 s** average, 4.99 s max (ICMP, 9/10 replies) | Observed successful replies meet target; CoAP deadline and lost reply not verified |
+| Lab 4: Time to see a lost sensor | ≤ 60s | **5.2 s** to local `Sensor lost`; client-side 5.03 not captured | Not verified at client; firmware-derived expiry behavior in §6.2 |
 | Lab 4: Read failures, radio busy | < 5% | **0 %** in two windows (0/90, 0/84); radio load not labelled | [ ] Pass — not verified |
 
 **Lab 1 distance table** (RSSI from the receiver's neighbor table; PER from 100 round-trip pings started by the Leader / the Router):
@@ -224,9 +224,82 @@ Link budget: Ptx +20 dBm, antenna gains ≈2 dBi each, sensitivity ≈−100 dBm
 | 5,000 ms | 9/10 | 10 % | 1,110 / 3,267.1 / 4,988 |
 | 15,000 ms | 10/10 | 0 % | 1,912 / 7,641.6 / 13,368 |
 
-**Energy estimate for a sleepy valve: pending.** Needed: the 802.15.4 RX and deep-sleep currents from the ESP32-C6 datasheet (cite the table), ≈10 ms of radio per poll, then I_avg = (I_rx·0.010 s + I_sleep·(T_poll − 0.010 s)) / T_poll and battery life = 3,000 mAh / I_avg at T_poll = 5 s.
+**Calculated energy estimate:** completed in §6.1, with a polling-only model and explicit limits; whole-board current and battery life were not measured.
 
 **Lab 4 acquisition timing** (`soilsense stats`, S with DS18B20): one read every 2 s; read time min 760.7 ms, mean **760.9 ms** (38 % of the period), max 779.2 ms — consistent with a 12-bit DS18B20 conversion (up to ≈750 ms). Still-air variation over 20 samples: 24.62–24.88 °C, σ ≈ 0.086 °C (not a calibration). A warm-air transient raised the reading **+2.24 °C** (24.88 → 27.12 °C) and crossed back under the half-way level 14–16 s after the peak.
+
+
+### 6.1 Calculated polling latency and energy budget
+
+These are calculations, not additional hardware measurements. Assume arrivals independent of the poll schedule and uniformly distributed within each period T. The ideal mean wait for the next poll is T/2, before network, queueing and processing delays. The recorded ping schedule does not establish uniform arrival phases.
+
+For the guide's simplified energy exercise, use 10 ms active per poll and I_avg = I_RX × (0.010/T) + I_sleep × (1 − 0.010/T). The [Espressif ESP32-C6 datasheet v1.6](https://documentation.espressif.com/esp32-c6_datasheet_en.html), Tables 5-9 and 5-11, specifies 74 mA for 802.15.4 RX and 7 µA for deep sleep. Use them as illustrative state currents, not measured board averages.
+
+| Poll T | Ideal mean wait T/2 | Poll radio-on fraction | Two-state I_avg | Ideal 3,000 mAh / I_avg |
+|---|---|---|---|---|
+| 1 s | 0.5 s | 1.000 % | 0.74693 mA | ≈167 days |
+| 5 s | 2.5 s | 0.200 % | 0.15499 mA | ≈807 days |
+| 15 s | 7.5 s | 0.0667 % | 0.05633 mA | ≈2,219 days |
+
+**Interpretation:** 5 s reduces polling activity by 80 % relative to 1 s. The multi-year outputs expose the simplified model's limits: it excludes transmit pulses, wake-up, CPU, sensing, LEDs, USB circuitry, regulator losses and battery aging. A Thread sleepy device is not proof that this firmware enters chip deep sleep while retaining connectivity. Thus these figures are illustrative and cannot verify three-month autonomy.
+
+Two AA cells in series retain 3,000 mAh capacity; their voltages add. Using the DDR's nominal 3 V battery and a 90-day planning interval gives 9 Wh / 2,160 h = **4.17 mW** available average battery power. At a nominal 3.3 V load and ideal conversion this is **1.26 mA**; real conversion losses reduce the allowance. Confirm runtime with a current trace of the complete powered assembly, including its actual sleep mode and supply.
+
+### 6.2 Firmware-derived failure and recovery sequence
+
+`lab4_sensors/src/reading.c` and `env_temp.c` define the following expected sequence. It is a code analysis, not an executed simulation or a new measured run.
+
+| Event | Expected behavior and timing basis |
+|---|---|
+| Sensor read fails | Failed-read counter increments; last accepted reading and timestamp are retained. |
+| Third consecutive read failure | Local `Sensor lost` log. With 2 s sampling, timing also depends on disconnection phase and driver duration; recorded result remains 5.2 s after the last good reading. |
+| GET while last accepted reading is younger than 60 s | `2.05` with that reading; Max-Age = 60 − floor(age in seconds). |
+| GET at age ≥ 60 s, or before any accepted reading | `5.03`, text `no fresh reading`, Max-Age 10; no Observe option. |
+| Previously fresh data expires with active observers | The policy worker, nominally scheduled every second, attempts a CON `5.03` notification and removes observations. Delivery delay/loss and scheduling prevent treating 60 s as a measured client deadline. |
+| Sensor returns with an accepted reading | GET can return `2.05` again. After expiry ended Observe, the client must register again. |
+| Whole node disappears | No application response. A CON request times out according to client settings; 69.44 s was measured in Lab 3, not independently in Lab 4. |
+
+**Recorded outage:** last accepted reading at 00:05:54.862; local lost log at 00:06:00.102; return at 00:06:20.862. Differences are **5.240 s**, **20.760 s**, and **26.000 s** respectively. The data would reach the freshness limit at **00:06:54.862** if no accepted reading intervened. Since recovery preceded that instant, this run does not demonstrate `5.03`. It also does not time physical wire reconnection, whose instant was not captured.
+
+For a follow-up, retain a timestamped last good reading, disconnect beyond its 60 s limit, record both Observe and GET at the client, then reconnect and record the first accepted reading, GET success and re-registration. This distinguishes local detection, data expiry and client notification.
+
+### 6.3 Completion of missing evidence against the lab tasks
+
+This inventory completes the documentation of each gap without assigning an unsupported experimental value. A missing capture does not prove an exercise was not executed. Optional exercises are not claimed as completed.
+
+| Required item | Available result / defensible conclusion | Evidence still needed to close it experimentally |
+|---|---|---|
+| Lab 1: quietest/loudest channel and their noise levels | No saved scan; neighboring RSSI cannot reconstruct these values. | Timestamped `ot scan energy 500` output with per-channel levels. |
+| Lab 1: reliable range and vegetation spacing | Recorded distance table retained. The 3 m/2 m vegetation figures are planning estimates, not field measurements. | Outdoor repeat with installation conditions recorded; ≥300 loss-free pings per condition for an approximate 95 % upper loss bound below 1 %. |
+| Lab 2: forwarded-frame count and one-/two-hop proof | 16/32 ms RTT is compatible with an extra hop; it does not prove the path. | Router/neighbor tables plus B's MAC counter changes during 20 A→C pings, with background traffic considered. |
+| Lab 2: healing in three runs | No recoverable failure timestamp; E4 cannot identify a recovery time. | Three timestamped relay removals with a weak but viable A–C backup link, lost pings and route after recovery. No numeric healing prediction is validated by these sources. |
+| Lab 3: median RTT of 10 GETs and ping comparison | ICMP results retained as network context; no CoAP timing can be inferred from them alone. | Ten timestamped GET request/response pairs and ten baseline pings; report GET median and ping average separately. |
+| Lab 3: byte budget | Recorded requests 15–18 B, valve responses 13 B, notifications 19 B; temperature CBOR is 6 B and valve CBOR 4 B. | Pair request/response lengths for each GET/PUT and actual token/options; confirm full frame budget or capture if claiming absence of fragmentation. |
+| Lab 3: Observe comparison | 34 updates in ≈330 s = ≈6.18 updates/min; ≈330 GETs at 1 Hz / 34 updates = **9.7×** request-count-to-update-count ratio. | A separate exact 300 s count if reporting the guide's five-minute table. This ratio excludes subscription, responses, ACKs and retries and is not an energy measurement. |
+| Lab 3: duplicate delivery in five PUTs | Idempotent state-setting supported; identical Message ID delivery not established. | Five timestamped CON PUTs at 5 s poll, with Message IDs and server receptions; configured client timers. |
+| Labs 3–4: dashboard interaction | Existing console/LED evidence retained; dashboard evidence not attached here. | Chart/valve screenshot with matching PUT log; sensor-loss screenshot and time to visible indication. |
+| Lab 4: resolution and reference offset | 0.26 °C recorded spread and σ ≈0.086 °C describe variation, not accuracy or the smallest sensor step. | Raw one-minute series for empirical step size; simultaneous reference reading and offset = sensor − reference. |
+| Lab 4: breath response and plausibility injections | Rise +2.24 °C and 14–16 s decay half-time retained; decay is not the requested rising half-time. Validation rules are known from code. | Timestamped rising curve, notification count and actual logs for injected 90, 31.5 and 25.5 °C; acceptance depends on the preceding value and age. |
+| Lab 4: lost sensor and lost node at client | Local 5.2 s and Lab 3 timeout retained; expiry behavior explained in §6.2. | Extended outage with client `5.03` capture and independently timed Lab 4 node-unreachable CON GET. |
+| Lab 4: quiet/busy failure comparison | 0/90 and 0/84 are valid recorded windows with unlabelled radio load; neither can be relabelled from firmware. | Two labelled 120 s windows after counter resets, quiet and 10 pings/s, with read/failure counters. |
+| Lab 4: recovery, reboot and class comparison | Probe recovery logged; readings, counters and observers are in RAM; dataset persistence is configured through NVS. | Reconnection timestamp, reboot trace showing actual restoration, and shared class table including this pair's row. |
+
+For a timing scenario only, the guide's initial random CON wait of 2–3 s and four doubling retransmissions gives a total timeout of (1 + 2 + 4 + 8 + 16) × initial_wait = **62–93 s** if the request remains unanswered. The measured **69.44 s** fits that model. This does not predict a new exact timeout, healing time or duplicate count.
+
+### 6.4 Source traceability for the completion review
+
+The supplied course checkout is `4201327-iot_systems_design-main` in Downloads. Source references below identify that checkout, not new experimental evidence:
+
+| Source | What it establishes |
+|---|---|
+| `labs/lab1.md`–`labs/lab4.md` | Required experiments, quantities, comparison windows and targets used in §6.3. |
+| `firmware/lab1_radio/src/main.c`; `lab2_mesh/src/main.c` | Radio-ready log and Thread-role LED handling; routing and healing are delegated to OpenThread, not specified as fixed delays here. |
+| `firmware/lab3_coap/src/env_temp.c` | Simulated temperature 24.5 + sin(2πt/60) + noise (approximately ±0.1 °C), sampled nominally each second; Observe threshold >0.5 °C and heartbeat 45 s. |
+| `firmware/lab3_coap/src/valve.c`, `main.c`, `app.h`; corresponding Lab 4 files | GET/PUT states, CBOR, invalid payload rejection, idempotent set-state operations, ACK response to CON and NON response to NON. |
+| `firmware/lab4_sensors/src/reading.c`, `env_temp.c`, `app.h` | Sampling, validation, retained reading age, statistics, `5.03` behavior and observation termination. |
+| `firmware/lab4_sensors/prj.conf`; `west.yml` | NVS and stack configuration; course Zephyr revision `2f0bc11264a8e72e214f3db0a3fa221eb022453a`. They do not establish the current drawn by this board. |
+| `docs/api.md`; Espressif datasheet linked in §6.1 | Course API contract and manufacturer state-current inputs for the illustrative energy calculation. |
+
 
 ---
 
@@ -256,7 +329,7 @@ Link budget: Ptx +20 dBm, antenna gains ≈2 dBi each, sensitivity ≈−100 dBm
 
 | Characteristic | Addressed? | How | Gaps |
 |---|---|---|---|
-| Availability | Partly | `/env/temp` answered on GET and Observe; Max-Age 60 bounds how long a reading is served | 5.03 path and client-side timeout not captured in Lab 4 |
+| Availability | Partly | GET/Observe captured; firmware-derived expiry and re-registration documented in §6.2 | Recorded outage ended before expiry; client 5.03 and Lab 4 node timeout still need captures (§6.3) |
 | Confidentiality | No | Thread link-layer encryption with the network key only | No end-to-end security on CoAP → Lab 6 |
 | Integrity | Partly | Range (−40…85 °C) and max-step (5 °C) checks; 0 rejected reads in our windows | No calibration against a reference; malicious tampering → Lab 6 |
 | Reliability | Partly | 0 failed reads in 90 and 84 reads; mean read 760.9 ms | Windows not labelled quiet/busy; no long-run test |
