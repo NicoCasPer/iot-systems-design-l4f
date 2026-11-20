@@ -1,0 +1,499 @@
+
+--- Apertura 2026-11-06T10:37:49.095650-05:00 /dev/cu.usbmodem5C850330501 ---
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fc95e20,len:0x59b8
+load:0x40374000,len:0x11e08
+load:0x50000000,len:0x24
+SHA-256 comparison failed:
+Calculated: 99cd6718029bff00f356947957c8c2e2571215069605c12efa796e6e62d7bcf1
+Expected: 00000000d0870000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x4037d5a4
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 29 2026 16:31:54
+W (soc_init): Unicore bootloader
+I (soc_init): chip revision: v0.2
+I (flash_init): Boot SPI Speed : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM	: lma=00000020h vma=3fc95e20h size=059b8h ( 22968)
+I (boot): IRAM	: lma=000059e0h vma=40374000h size=11e08h ( 73224)
+I (boot): RTC_DATA	: lma=000177f0h vma=50000000h size=00024h (    36)
+I (boot): IROM	: lma=00020000h vma=42000000h size=100c20h (1051680)
+I (boot): DROM	: lma=00130000h vma=3c110000h size=2a454h (173140)
+I (boot): libc heap size 34 kB.
+I (cache): Instruction cache: size 16KB, 8Ways, cache line size 32Byte
+I (spi_flash): detected chip: gd
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+I (octal_psram): vendor id    : 0x0d (AP)
+I (octal_psram): dev id       : 0x02 (generation 3)
+I (octal_psram): density      : 0x03 (64 Mbit)
+I (octal_psram): good-die     : 0x01 (Pass)
+I (octal_psram): Latency      : 0x01 (Fixed)
+I (octal_psram): VCC          : 0x01 (3V)
+I (octal_psram): SRF          : 0x01 (Fast Refresh)
+I (octal_psram): BurstType    : 0x01 (Hybrid Wrap)
+I (octal_psram): BurstLen     : 0x01 (32 Byte)
+I (octal_psram): Readlatency  : 0x02 (10 cycles@Fixed)
+I (octal_psram): DriveStrength: 0x00 (1/1)
+I (esp_psram): Found 8MB PSRAM device
+I (esp_psram): Speed: 40MHz
+[m
+[1;32muart:~$ [m[8D[JI (pp): pp rom version: e7ae62f
+[1;32muart:~$ [m[8D[JI (net80211): net80211 rom version: e7ae62f
+[1;32muart:~$ [m[8D[JI (wifi_init): rx ba win: 6
+[1;32muart:~$ [m[8D[J[1;32muart:~$ [m
+>>> ot rcp version
+ot rcp version
+[1;32muart:~$ [mexit
+
+>>> ot version
+
+>>> 
+
+>>> ot state
+
+>>> ot rcp version
+
+--- Apertura 2026-11-06T10:41:48.967196-05:00 /dev/cu.usbmodem5C850330501 ---
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fc95e20,len:0x59b8
+load:0x40374000,len:0x11e08
+load:0x50000000,len:0x24
+SHA-256 comparison failed:
+Calculated: 99cd6718029bff00f356947957c8c2e2571215069605c12efa796e6e62d7bcf1
+Expected: 00000000d0870000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x4037d5a4
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 29 2026 16:31:54
+W (soc_init): Unicore bootloader
+I (soc_init): chip revision: v0.2
+I (flash_init): Boot SPI Speed : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM	: lma=00000020h vma=3fc95e20h size=059b8h ( 22968)
+I (boot): IRAM	: lma=000059e0h vma=40374000h size=11e08h ( 73224)
+I (boot): RTC_DATA	: lma=000177f0h vma=50000000h size=00024h (    36)
+I (boot): IROM	: lma=00020000h vma=42000000h size=100c20h (1051680)
+I (boot): DROM	: lma=00130000h vma=3c110000h size=2a454h (173140)
+I (boot): libc heap size 34 kB.
+I (cache): Instruction cache: size 16KB, 8Ways, cache line size 32Byte
+I (spi_flash): detected chip: gd
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+I (octal_psram): vendor id    : 0x0d (AP)
+I (octal_psram): dev id       : 0x02 (generation 3)
+I (octal_psram): density      : 0x03 (64 Mbit)
+I (octal_psram): good-die     : 0x01 (Pass)
+I (octal_psram): Latency      : 0x01 (Fixed)
+I (octal_psram): VCC          : 0x01 (3V)
+I (octal_psram): SRF          : 0x01 (Fast Refresh)
+I (octal_psram): BurstType    : 0x01 (Hybrid Wrap)
+I (octal_psram): BurstLen     : 0x01 (32 Byte)
+I (octal_psram): Readlatency  : 0x02 (10 cycles@Fixed)
+I (octal_psram): DriveStrength: 0x00 (1/1)
+I (esp_psram): Found 8MB PSRAM device
+I (esp_psram): Speed: 40MHz
+[m
+[1;32muart:~$ [m[8D[JI (pp): pp rom version: e7ae62f
+[1;32muart:~$ [m[8D[JI (net80211): net80211 rom version: e7ae62f
+[1;32muart:~$ [m[8D[JI (wifi_init): rx ba win: 6
+[1;32muart:~$ [m[8D[J[1;32muart:~$ [m[8D[J[00:00:00.091,000] [0m<inf> fs_nvs: 8 Sectors of 4096 bytes[0m
+[1;32muart:~$ [m[8D[J[00:00:00.091,000] [0m<inf> fs_nvs: alloc wra: 1, f30[0m
+[1;32muart:~$ [m[8D[J[00:00:00.091,000] [0m<inf> fs_nvs: data wra: 1, 22c[0m
+[1;32muart:~$ [m[8D[J*** Booting Zephyr OS build v4.4.0-13939-g2f0bc11264a8 ***
+[1;32muart:~$ [m[8D[JWARNING: Using a potentially insecure PSA ITS encryption key provider.
+[1;32muart:~$ [m[8D[J[00:00:00.909,000] [1;33m<wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.[0m
+[1;32muart:~$ [m[8D[J[1;32muart:~$ [m
+>>> ot rcp version
+ot rcp version
+OPENTHREAD/e4d97681c; Zephyr; Oct 29 2026 16:31:35
+
+Done
+
+[1;32muart:~$ [m
+>>> ot version
+ot version
+OPENTHREAD/e4d97681c; Zephyr; Oct 29 2026 16:31:51
+
+Done
+
+[1;32muart:~$ [m
+>>> wifi status
+wifi status
+Status: successful
+==================
+State: INACTIVE
+[1;32muart:~$ [m
+>>> wifi scan
+wifi scan
+Scan requested
+[1;32muart:~$ [m[8D[J
+Num  | SSID                             (len) | Chan (Band)   | RSSI | Security             | BSSID             | MFP     
+[1;32muart:~$ [m[8D[J1    | AdministrativosUN                17    | 1    (2.4GHz) | -61  | WPA2-PSK             | 74:78:A6:EE:0E:88 | Disable 
+[1;32muart:~$ [m[8D[J2    | Prueba                           6     | 1    (2.4GHz) | -63  | WPA2-PSK             | 3E:A1:3A:26:10:93 | Disable 
+[1;32muart:~$ [m[8D[J3    | DocentesUN                       10    | 1    (2.4GHz) | -61  | WPA2-PSK             | 74:78:A6:EE:0E:89 | Disable 
+[1;32muart:~$ [m[8D[J4    | EstudiantesUN                    13    | 1    (2.4GHz) | -61  | WPA2-PSK             | 74:78:A6:EE:0E:8A | Disable 
+[1;32muart:~$ [m[8D[J5    | P-201                            5     | 1    (2.4GHz) | -61  | WPA2-PSK             | 74:78:A6:EE:0E:8B | Disable 
+[1;32muart:~$ [m[8D[J6    | DocentesUN                       10    | 1    (2.4GHz) | -82  | WPA2-PSK             | 04:D5:90:6B:C4:3A | Disable 
+[1;32muart:~$ [m[8D[J7    | SedesUN                          7     | 1    (2.4GHz) | -88  | WPA2-PSK             | 70:4C:A5:C1:27:75 | Disable 
+[1;32muart:~$ [m[8D[J8    | EstudiantesUN                    13    | 1    (2.4GHz) | -80  | WPA2-PSK             | 04:D5:90:6B:C4:3B | Disable 
+[1;32muart:~$ [m[8D[J9    | ApoyoUN                          7     | 1    (2.4GHz) | -81  | WPA2-PSK             | 04:D5:90:6B:C4:39 | Disable 
+[1;32muart:~$ [m[8D[J10   | InvitadosUN                      11    | 1    (2.4GHz) | -82  | WPA2-PSK             | 04:D5:90:6B:C4:3C | Disable 
+[1;32muart:~$ [m[8D[J11   | SedesUN                          7     | 1    (2.4GHz) | -81  | WPA2-PSK             | 04:D5:90:6B:C4:3D | Disable 
+[1;32muart:~$ [m[8D[J12   | DocentesUN                       10    | 1    (2.4GHz) | -88  | WPA2-PSK             | 70:4C:A5:C1:27:72 | Disable 
+[1;32muart:~$ [m[8D[J13   | EstudiantesUN                    13    | 6    (2.4GHz) | -78  | WPA2-PSK             | 70:4C:A5:B1:DD:43 | Disable 
+[1;32muart:~$ [m[8D[J14   | Galaxy Z Fold4 5453              19    | 6    (2.4GHz) | -46  | WPA2-PSK             | 42:28:C6:F5:B1:6C | Disable 
+[1;32muart:~$ [m[8D[J15   | iPhone Camilo                    13    | 6    (2.4GHz) | -40  | WPA2-PSK             | 16:26:7E:49:C3:BD | Disable 
+[1;32muart:~$ [m[8D[J16   | InvitadosUN                      11    | 6    (2.4GHz) | -77  | WPA2-PSK             | 70:4C:A5:B1:DD:44 | Disable 
+[1;32muart:~$ [m[8D[J17   | InvitadosUN                      11    | 6    (2.4GHz) | -83  | WPA2-PSK             | 70:4C:A5:C1:1A:FC | Disable 
+[1;32muart:~$ [m[8D[J18   | SedesUN                          7     | 6    (2.4GHz) | -82  | WPA2-PSK             | 70:4C:A5:C1:1A:FD | Disable 
+[1;32muart:~$ [m[8D[J19   | AdministrativosUN                17    | 6    (2.4GHz) | -83  | WPA2-PSK             | 70:4C:A5:C1:1A:F8 | Disable 
+[1;32muart:~$ [m[8D[J20   | DocentesUN                       10    | 6    (2.4GHz) | -91  | WPA2-PSK             | 70:4C:A5:B1:F2:EA | Disable 
+[1;32muart:~$ [m[8D[J21   | ApoyoUN                          7     | 6    (2.4GHz) | -89  | WPA2-PSK             | 70:4C:A5:C1:1A:F9 | Disable 
+[1;32muart:~$ [m[8D[J22   | iPhone de juanserive10 (2)       26    | 6    (2.4GHz) | -88  | WPA2-PSK             | 26:71:71:83:28:49 | Disable 
+[1;32muart:~$ [m[8D[J23   | AdministrativosUN                17    | 6    (2.4GHz) | -78  | WPA2-PSK             | 70:4C:A5:B1:DD:40 | Disable 
+[1;32muart:~$ [m[8D[J24   | ApoyoUN                          7     | 6    (2.4GHz) | -77  | WPA2-PSK             | 70:4C:A5:B1:DD:41 | Disable 
+[1;32muart:~$ [m[8D[J25   | Camilo                           6     | 6    (2.4GHz) | -48  | WPA2-PSK             | DA:B1:C7:1C:8D:5D | Disable 
+[1;32muart:~$ [m[8D[J26   | DIRECT-HE5_0EBB85FC0GO5Z         24    | 11   (2.4GHz) | -69  | WPA2-PSK             | E2:BB:9E:99:81:56 | Disable 
+[1;32muart:~$ [m[8D[J27   | A16 de David                     12    | 11   (2.4GHz) | -50  | WPA2-PSK             | 72:58:FA:B0:9C:35 | Disable 
+[1;32muart:~$ [m[8D[J28   | EBF2C475-@E8D0dzEde1AOpf         24    | 11   (2.4GHz) | -48  | WPA2-PSK             | F8:D0:27:F4:E9:E8 | Disable 
+[1;32muart:~$ [m[8D[J29   | ApoyoUN                          7     | 11   (2.4GHz) | -82  | WPA2-PSK             | 04:D5:90:A7:BF:E1 | Disable 
+[1;32muart:~$ [m[8D[J30   | DocentesUN                       10    | 11   (2.4GHz) | -80  | WPA2-PSK             | 04:D5:90:A7:BF:E2 | Disable 
+[1;32muart:~$ [m[8D[J31   | EstudiantesUN                    13    | 11   (2.4GHz) | -80  | WPA2-PSK             | 04:D5:90:A7:BF:E3 | Disable 
+[1;32muart:~$ [m[8D[J32   | InvitadosUN                      11    | 11   (2.4GHz) | -82  | WPA2-PSK             | 04:D5:90:A7:BF:E4 | Disable 
+[1;32muart:~$ [m[8D[J33   | SedesUN                          7     | 11   (2.4GHz) | -81  | WPA2-PSK             | 04:D5:90:A7:BF:E5 | Disable 
+[1;32muart:~$ [m[8D[JScan request done
+[1;32muart:~$ [m
+>>> wifi connect -s "iPhone de Oscar T" -p "<redactado>" -k 1
+wifi connect -s "iPhone de Oscar T" -p "<redactado>" -k 1
+Connection requested
+[1;32muart:~$ [m[8D[JConnected
+[1;32muart:~$ [m[8D[J[00:02:14.610,000] [0m<inf> net_dhcpv4: Received: 172.20.10.3[0m
+[1;32muart:~$ [m[8D[J[1;32muart:~$ [m
+>>> ot state
+ot state
+disabled
+
+Done
+
+[1;32muart:~$ [m
+>>> ot dataset set active <redactado>
+ot dataset set active <redactado>
+<redactado>
+<redactado>
+<redactado>
+Done
+
+[1;32muart:~$ [m
+>>> ot ifconfig up
+ot ifconfig up
+Done
+
+[1;32muart:~$ [m
+>>> ot thread start
+ot thread start
+Done
+
+[1;32muart:~$ [m
+>>> wifi status
+wifi status
+Status: successful
+==================
+State: COMPLETED
+Interface Mode: STATION
+Link Mode: WIFI 4 (802.11n/HT)
+SSID: iPhone de Oscar T
+BSSID: F2:FF:B3:4B:FF:73
+Band: 2.4GHz
+Channel: 6
+Security:  WPA2-PSK
+MFP: Disable
+RSSI: -39
+Beacon Interval: 3
+DTIM: 0
+TWT: Not supported
+Current PHY TX rate (Mbps) : 0.0
+[1;32muart:~$ [m
+>>> net iface
+net iface
+Default interface: 1
+
+
+Interface thread0 (0x3fc9b270) (OpenThread) [1]
+=====================================
+Link addr : 98:A3:16:FF:FE:96:BF:38
+MTU       : 1280
+Flags     : AUTO_START,MCAST_FORWARD,IPv4,IPv6,NO_ND,NO_MLD
+Device    : hdlc_rcp_if (0x3c139a84)
+Status    : oper=UP, admin=UP, carrier=ON
+IPv6 unicast addresses (max 6):
+	fe80::fc9e:9df9:cc1a:8f0b autoconf preferred infinite
+	fd7f:1c87:7a93:f63e:2569:5b86:c58a:43ea autoconf preferred infinite meshlocal
+IPv6 multicast addresses (max 85):
+	ff02::1  <not joined>
+	ff03::1
+	ff03::fc
+	ff33:40:fd7f:1c87:7a93:f63e:0:1
+	ff32:40:fd7f:1c87:7a93:f63e:0:1
+IPv6 prefixes (max 2):
+	<none>
+IPv6 hop limit           : 64
+IPv6 base reachable time : 30000
+IPv6 reachable time      : 23701
+IPv6 retransmit timer    : 0
+IPv4 unicast addresses (max 1):
+	<none>
+IPv4 multicast addresses (max 1):
+	<none>
+IPv4 gateway : 0.0.0.0
+DHCPv4 state      : disabled
+
+Interface wlan0 (0x3fc9b3e8) (WiFi) [2]
+===============================
+Link addr : E0:72:A1:F3:D3:48
+MTU       : 1450
+Flags     : AUTO_START,MCAST_FORWARD,IPv4,IPv6
+Device    : wifi (0x3c139ac4)
+Status    : oper=UP, admin=UP, carrier=ON
+Ethernet capabilities supported:
+IPv6 unicast addresses (max 6):
+	fe80::e272:a1ff:fef3:d348 autoconf preferred infinite
+	2803:1800:1304:845c:e272:a1ff:fef3:d348 autoconf preferred infinite
+IPv6 multicast addresses (max 85):
+	ff04::
+	ff05::
+	ff08::
+	ff0e::
+	ff02::2
+	ff02::fb
+	ff32:40:fd7f:1c87:7a93:f63e:0:3
+	ff02::1
+	ff02::1:fff3:d348
+IPv6 prefixes (max 2):
+	2803:1800:1304:845c::/64 infinite
+IPv6 default router :
+	fe80::98b3:79ff:fe68:7364
+IPv6 hop limit           : 64
+IPv6 base reachable time : 43000
+IPv6 reachable time      : 45176
+IPv6 retransmit timer    : -402456576
+IPv4 unicast addresses (max 1):
+	172.20.10.3/255.255.255.240 DHCP preferred
+IPv4 multicast addresses (max 1):
+	<none>
+IPv4 gateway : 172.20.10.1
+DHCPv4 lease time : 3600
+DHCPv4 renew time : 1800
+DHCPv4 server     : 172.20.10.1
+DHCPv4 requested  : 172.20.10.3
+DHCPv4 state      : bound
+DHCPv4 attempts   : 1
+DHCPv4 state      : bound
+[1;32muart:~$ [m
+>>> ot state
+ot state
+detached
+
+Done
+
+[1;32muart:~$ [m
+>>> ot br state
+ot br state
+stopped
+
+Done
+
+[1;32muart:~$ [m
+>>> ot nat64 state
+ot nat64 state
+PrefixManager: NotRunning
+
+Translator: NotRunning
+
+Done
+
+[1;32muart:~$ [m
+>>> ot br omrprefix
+ot br omrprefix
+Local: fd5d:ecb4:d503:1::/64
+
+Favored: ::/0 prf:med
+
+Done
+
+[1;32muart:~$ [m
+>>> ot netdata show
+ot netdata show
+Prefixes:
+
+Routes:
+
+Services:
+
+44970 01 77000500000e10 s 5800 0
+
+Contexts:
+
+Commissioning:
+
+13964 - - -
+
+Done
+
+[1;32muart:~$ [m
+>>> ot dataset active -x
+ot dataset active -x
+<redactado>
+
+Done
+
+[1;32muart:~$ [m
+>>> ot state
+ot state
+leader
+
+Done
+
+[1;32muart:~$ [m
+>>> ot br state
+ot br state
+running
+
+Done
+
+[1;32muart:~$ [m
+>>> ot nat64 state
+ot nat64 state
+PrefixManager: Active
+
+Translator: Active
+
+Done
+
+[1;32muart:~$ [m
+>>> ot br omrprefix
+ot br omrprefix
+Local: fd5d:ecb4:d503:1::/64
+
+Favored: fd5d:ecb4:d503:1::/64 prf:low
+
+Done
+
+[1;32muart:~$ [m
+>>> ot netdata show
+ot netdata show
+Prefixes:
+
+fd5d:ecb4:d503:1::/64 paros low 5800
+
+Routes:
+
+fd5d:ecb4:d503:2:0:0::/96 sn low 5800
+
+::/0 s med 5800
+
+Services:
+
+44970 01 77000500000e10 s 5800 0
+
+44970 5d fd7f1c877a93f63e25695b86c58a43ead120 s 5800 1
+
+Contexts:
+
+fd5d:ecb4:d503:1::/64 1 sc
+
+Commissioning:
+
+13964 - - -
+
+Done
+
+[1;32muart:~$ [m
+>>> ot child table
+ot child table
+| ID  | RLOC16 | Timeout    | Age        | LQ In | C_VN |R|D|N|Ver|CSL|QMsgCnt|Suprvsn| Extended MAC     |
+
++-----+--------+------------+------------+-------+------+-+-+-+---+---+-------+-------+------------------+
+
+
+
+Done
+
+[1;32muart:~$ [m
+>>> ot router table
+ot router table
+| ID | RLOC16 | Next Hop | Path Cost | LQ In | LQ Out | Age | Extended MAC     | Link |
+
++----+--------+----------+-----------+-------+--------+-----+------------------+------+
+
+| 22 | 0x5800 |       63 |         0 |     0 |      0 |   0 | fe9e9df9cc1a8f0b |    0 |
+
+
+
+Done
+
+[1;32muart:~$ [m[8D[JConnected
+[1;32muart:~$ [m
+--- Apertura 2026-11-13T09:35:19.137181-05:00 /dev/cu.usbmodem5C850330501 ---
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fc95e20,len:0x59b8
+load:0x40374000,len:0x11e08
+load:0x50000000,len:0x24
+SHA-256 comparison failed:
+Calculated: 99cd6718029bff00f356947957c8c2e2571215069605c12efa796e6e62d7bcf1
+Expected: 00000000d0870000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x4037d5a4
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 29 2026 16:31:54
+W (soc_init): Unicore bootloader
+I (soc_init): chip revision: v0.2
+I (flash_init): Boot SPI Speed : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM	: lma=00000020h vma=3fc95e20h size=059b8h ( 22968)
+I (boot): IRAM	: lma=000059e0h vma=40374000h size=11e08h ( 73224)
+I (boot): RTC_DATA	: lma=000177f0h vma=50000000h size=00024h (    36)
+I (boot): IROM	: lma=00020000h vma=42000000h size=100c20h (1051680)
+I (boot): DROM	: lma=00130000h vma=3c110000h size=2a454h (173140)
+I (boot): libc heap size 34 kB.
+I (cache): Instruction cache: size 16KB, 8Ways, cache line size 32Byte
+I (spi_flash): detected chip: gd
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+I (octal_psram): vendor id    : 0x0d (AP)
+I (octal_psram): dev id       : 0x02 (generation 3)
+I (octal_psram): density      : 0x03 (64 Mbit)
+I (octal_psram): good-die     : 0x01 (Pass)
+I (octal_psram): Latency      : 0x01 (Fixed)
+I (octal_psram): VCC          : 0x01 (3V)
+I (octal_psram): SRF          : 0x01 (Fast Refresh)
+I (octal_psram): BurstType    : 0x01 (Hybrid Wrap)
+I (octal_psram): BurstLen     : 0x01 (32 Byte)
+I (octal_psram): Readlatency  : 0x02 (10 cycles@Fixed)
+I (octal_psram): DriveStrength: 0x00 (1/1)
+I (esp_psram): Found 8MB PSRAM device
+I (esp_psram): Speed: 40MHz
+[m
+[1;32muart:~$ [m[8D[JI (pp): pp rom version: e7ae62f
+[1;32muart:~$ [m[8D[JI (net80211): net80211 rom version: e7ae62f
+[1;32muart:~$ [m[8D[JI (wifi_init): rx ba win: 6
+[1;32muart:~$ [m[8D[J[1;32muart:~$ [m
+>>> ot version
+ot version
+[1;32muart:~$ [mexit

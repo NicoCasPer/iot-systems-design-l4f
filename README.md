@@ -16,12 +16,16 @@ Repositorio del equipo para **Desarrollo de Sistemas IoT** (4201327), Universida
 | [`ddr/labs1-4_pareja1/`](ddr/labs1-4_pareja1/DDR.md) | DDR de la pareja 1, labs 1–4 |
 | [`ddr/labs1-4_pareja2/`](ddr/labs1-4_pareja2/DDR.md) | DDR de la pareja 2, labs 1–4 |
 | [`ddr/labs5-8_equipo/`](ddr/labs5-8_equipo/DDR.md) | DDR del equipo completo, labs 5–8 |
+| [`firmware/`](firmware/README.md) | Código y configuraciones de los labs 0–5, herramientas y dependencias de Zephyr |
+| [`datos/`](datos/README.md) | Registro de consola y notas disponibles del Lab 5, con procedencia y fechas |
 | [`presentacion_lorawan/`](presentacion_lorawan/) | Presentación sobre LoRaWAN (13-nov-2026) |
 | [`proyecto_final/`](proyecto_final/) | Business case y pitch final |
 
 Cada DDR sigue la [plantilla del curso](https://github.com/saacifuentesmu/4201327-iot_systems_design/blob/main/docs/ddr_template.md) y guarda su evidencia (fotos, capturas) en su carpeta `img/labN/`.
 
-El firmware y las guías de laboratorio están en el [repo del curso](https://github.com/saacifuentesmu/4201327-iot_systems_design); aquí solo va lo que producimos nosotros.
+La copia del firmware del workspace del equipo está en [`firmware/`](firmware/README.md), organizada por laboratorio e incluyendo la variante de sensores para el Lab 5. El código base y las guías provienen del [repo del curso](https://github.com/saacifuentesmu/4201327-iot_systems_design). Las instrucciones de compilación y las diferencias entre versiones están en el README de firmware.
+
+Para la entrega hasta el **Lab 5**, consultar los dos DDR de pareja (Labs 1–4) y el DDR del equipo (Lab 5). Las fotos y las transcripciones incluidas en los DDR conservan su contexto; el [inventario de datos](datos/README.md) precisa qué archivos de consola están disponibles y qué registros originales faltan.
 
 ## Reglas
 

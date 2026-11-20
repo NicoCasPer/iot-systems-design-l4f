@@ -1,0 +1,20 @@
+Lab 5 — OTBR (ESP32-S3) · datos de la red · 2026-10-29
+
+Dataset activo (hex) — restaurar con: ot dataset set active <hex>
+<redactado>
+
+Network name : SoilSense-L4F
+Canal        : 25
+PAN ID       : 0x12ab
+Ext PAN ID   : 872e1ef94581992a
+Mesh-local   : fd7f:1c87:7a93:f63e::/64
+
+OMR (Local)  : fd5d:ecb4:d503:1::/64
+NAT64        : fd5d:ecb4:d503:2:0:0::/96
+OTBR ML-EID  : fd7f:1c87:7a93:f63e:2569:5b86:c58a:43ea
+
+Wi-Fi        : iPhone de Oscar T (2.4 GHz, canal 6, WPA2)
+OTBR IPv4    : 172.20.10.3   (gateway 172.20.10.1)
+OTBR LL WiFi : fe80::e272:a1ff:fef3:d348
+
+Puertos Mac  : S3 UART = /dev/cu.usbmodem5C850330501 · C6 = /dev/cu.usbmodem5B140623681

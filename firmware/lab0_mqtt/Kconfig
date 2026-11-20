@@ -1,0 +1,26 @@
+mainmenu "Lab 0 - Minimal IoT Implementation (MQTT)"
+
+config LAB_WIFI_SSID
+	string "Wi-Fi SSID"
+	default "changeme"
+	help
+	  Name of the 2.4 GHz network the node joins. The ESP32-C6 radio does
+	  not associate with 5 GHz-only APs.
+
+config LAB_WIFI_PSK
+	string "Wi-Fi password"
+	default "changeme"
+
+# TASK 2 - declare LAB_BROKER_ADDR (string) and LAB_BROKER_PORT (int), following
+# the style above. Guide section 1 gives the values and explains why the node now
+# needs an address that the HTTP lab did not.
+
+source "Kconfig.zephyr"
+
+config LAB_BROKER_ADDR
+	string "MQTT Broker IP Address"
+	default "192.168.1.100"
+
+config LAB_BROKER_PORT
+	int "MQTT Broker Port"
+	default 1883

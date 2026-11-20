@@ -2,8 +2,11 @@
 build/
 build_*/
 .venv/
+.venv*/
 __pycache__/
 *.pyc
+deps/
+.west/
 
 # Logs and editor/OS files
 *.log
@@ -15,3 +18,4 @@ __pycache__/
 .env
 *secret*
 *.key
+local.conf

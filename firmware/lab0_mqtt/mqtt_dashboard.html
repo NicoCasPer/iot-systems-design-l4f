@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESP32-C6 MQTT Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.15.2/mqtt.min.js"></script>
+<style>
+  body{font-family:sans-serif;max-width:420px;margin:40px auto;text-align:center;background:#111;color:#eee}
+  .temp{font-size:3rem;margin:20px 0}
+  button{font-size:1.1rem;padding:12px 24px;margin:8px;border:none;border-radius:8px;cursor:pointer;color:#fff}
+  .on{background:#2ecc71}
+  .off{background:#e74c3c}
+  .connect{background:#3498db}
+  input{padding:8px;border-radius:6px;border:1px solid #444;background:#222;color:#eee;width:160px}
+  #status{margin-top:14px;color:#888;font-size:.9rem}
+  fieldset{border:1px solid #333;border-radius:8px;margin-bottom:20px}
+  legend{padding:0 6px;color:#aaa}
+</style>
+</head>
+<body>
+  <h1>ESP32-C6 MQTT Dashboard</h1>
+
+  <fieldset>
+    <legend>Broker</legend>
+    <input id="host" placeholder="IP o host del broker" value="192.168.1.7">
+    <input id="port" placeholder="Puerto WS" value="9001" style="width:70px">
+    <br><br>
+    <button class="connect" onclick="connect()">Conectar</button>
+  </fieldset>
+
+  <div class="temp" id="temp">-- &deg;C</div>
+  <button class="on" onclick="setLed(1)" disabled id="btnOn">Encender LED</button>
+  <button class="off" onclick="setLed(0)" disabled id="btnOff">Apagar LED</button>
+  <div id="status">Sin conectar</div>
+
+<script>
+const TOPIC_SENSOR = 'iot/sensor';
+const TOPIC_CONTROL = 'iot/control';
+let client = null;
+
+function setStatus(msg) {
+  document.getElementById('status').textContent = msg;
+}
+
+function connect() {
+  const host = document.getElementById('host').value.trim();
+  const port = document.getElementById('port').value.trim();
+
+  if (client) {
+    client.end(true);
+  }
+
+  const url = `ws://${host}:${port}`;
+  setStatus('Conectando a ' + url + ' ...');
+
+  client = mqtt.connect(url, {
+    clientId: 'dashboard-' + Math.random().toString(16).slice(2),
+    reconnectPeriod: 2000,
+  });
+
+  client.on('connect', () => {
+    setStatus('Conectado al broker');
+    document.getElementById('btnOn').disabled = false;
+    document.getElementById('btnOff').disabled = false;
+    client.subscribe(TOPIC_SENSOR, { qos: 0 });
+  });
+
+  client.on('message', (topic, payload) => {
+    if (topic === TOPIC_SENSOR) {
+      try {
+        const data = JSON.parse(payload.toString());
+        document.getElementById('temp').textContent = data.temperature.toFixed(1) + ' \u00b0C';
+        setStatus('Ultimo dato: ' + new Date().toLocaleTimeString());
+      } catch (e) {
+        setStatus('Payload invalido en ' + topic);
+      }
+    }
+  });
+
+  client.on('error', (err) => {
+    setStatus('Error: ' + err.message);
+  });
+
+  client.on('close', () => {
+    setStatus('Desconectado');
+    document.getElementById('btnOn').disabled = true;
+    document.getElementById('btnOff').disabled = true;
+  });
+}
+
+function setLed(state) {
+  if (!client || !client.connected) {
+    setStatus('Conecta primero al broker');
+    return;
+  }
+  client.publish(TOPIC_CONTROL, JSON.stringify({ state }), { qos: 1 });
+}
+</script>
+</body>
+</html>
