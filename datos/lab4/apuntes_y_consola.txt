@@ -1,0 +1,578 @@
+IOT LAB 4
+
+
+ot factoryreset
+ot dataset init new
+ot dataset commit active
+ot ifconfig up
+ot thread start
+ot dataset active -x
+```[cite: 1, 2]
+> 📌 **Paso clave:** Copia la cadena hexadecimal gigante que imprime `ot dataset active -x` y envíasela a tu compañero[cite: 1, 2]. Luego inicia el cliente CoAP:
+```bash
+ot coap start
+```[cite: 1, 2]
+
+#### 2. Unirse a la red y obtener IP (TU COMPAÑERO en Placa S):
+```bash
+ot factoryreset
+ot dataset set active <CADENA_HEX_DE_C>
+ot ifconfig up
+ot thread start
+```[cite: 1, 2]
+> 📌 **Paso clave:** Tu compañero espera a estar en estado `child` o `router` (`ot state`) y luego ejecuta[cite: 1, 2]:
+```bash
+ot ipaddr mleid
+```[cite: 1, 2]
+*(Tu compañero te entrega esa dirección IPv6; en las siguientes instrucciones la llamaremos `<S-mleid>`)*[cite: 1, 2].
+
+---
+
+### Fase 2: Parte 3 — Integridad (*Is the number right?*)
+
+#### Tarea 3.1 — Resolución y Ruido (1 minuto en reposo)
+* **TU COMPAÑERO (Placa S):** Deja la sonda DS18B20 inmóvil sobre la mesa. En su consola activa el registro durante 1 minuto[cite: 2]:
+  ```bash
+  soilsense log on
+  ```[cite: 2]
+  *(Transcurrido 1 minuto viendo pasar las lecturas, ejecuta:)*
+  ```bash
+  soilsense log off
+  ```[cite: 2]
+* **AMBOS (Registrar en el reporte):**
+  * **Resolución:** El escalón más pequeño de cambio entre lecturas (ej. `0.0625 °C` en la sonda DS18B20)[cite: 2, 3].
+  * **Ruido:** La variación o diferencia entre el valor máximo y mínimo registrado durante ese minuto en reposo[cite: 2].
+
+#### Tarea 3.2 — Offset (Calibración)
+* **AMBOS:** Comparen la temperatura que reporta la sonda DS18B20 con el termómetro/referencia que indique el profesor[cite: 2]. Anoten la diferencia (*offset* $T_{DS18B20} - T_{ref}$) y verifiquen si se encuentra dentro de la precisión de $\pm 0.5\text{ °C}$ especificada en el *datasheet*[cite: 2, 3].
+
+#### Tarea 3.3 — Respuesta (*Breath test*) y Notificaciones
+1. **TÚ (Placa C):** Activa la suscripción por empuje (*Observe*) para recibir las lecturas en tiempo real[cite: 1, 2]:
+   ```bash
+   ot coap observe <S-mleid> env/temp
+   ```[cite: 1, 2]
+2. **TU COMPAÑERO (Placa S):** Respira/sopla directamente sobre la sonda de temperatura durante 3 a 5 segundos y luego déjala recuperar la temperatura ambiente[cite: 2].
+3. **AMBOS:** Anoten la elevación de temperatura (*rise*), el tiempo en llegar a la mitad de la recuperación y la cantidad de notificaciones que llegaron a la Placa C[cite: 2].
+
+---
+
+### Fase 3: Parte 4 — Disponibilidad (*Availability*)
+
+#### Tarea 4.1 — Falla 1: El sensor se desconecta (*Sensor lost* / Código `5.03`)
+1. **TÚ (Placa C):** Mantén la observación activa (`ot coap observe <S-mleid> env/temp`)[cite: 2].
+2. **TU COMPAÑERO (Placa S):** Desconecta el cable de datos amarillo (GPIO18) de la Placa S e inicien un cronómetro[cite: 2, 3].
+3. **Observación del comportamiento:**
+   * La **Placa S** registrará 3 fallos consecutivos y mostrará `Sensor lost`[cite: 2].
+   * La **Placa C** seguirá recibiendo notificaciones periódicas (*heartbeats*) con el último valor válido mientras dure el tiempo de vida `Max-Age`[cite: 2].
+   * **TÚ (Placa C):** Cada 15 segundos ejecuta[cite: 2]:
+     ```bash
+     ot coap get <S-mleid> env/temp
+     ```[cite: 2]
+     *(Observa cómo aumenta la edad del dato)*[cite: 2].
+   * **Cierre a los 60s:** Pasados 60 segundos desde la última lectura válida, **S** registrará `GET now answers 5.03` y cancelará la observación[cite: 2].
+   * **TÚ (Placa C):** Ejecuta de nuevo el `GET` y confirma que recibes el error `5.03 Service Unavailable`[cite: 2].
+
+#### Tarea 4.2 — Falla 2: El nodo queda inalcanzable (*Node unreachable* / Timeout)
+1. **TU COMPAÑERO (Placa S):** Vuelve a conectar el cable amarillo (GPIO18)[cite: 2, 3]. Espera a que la consola de S imprima `Sensor back`[cite: 2].
+2. **TÚ (Placa C):** Vuelve a suscribirte con[cite: 1, 2]:
+   ```bash
+   ot coap observe <S-mleid> env/temp
+   ```[cite: 1, 2]
+3. **TU COMPAÑERO (Placa S):** Simula la caída de red apagando el protocolo Thread[cite: 1, 2]:
+   ```bash
+   ot thread stop
+   ```[cite: 1, 2]
+4. **TÚ (Placa C):**
+   * Envía una petición confirmable e inicia el cronómetro[cite: 2]:
+     ```bash
+     ot coap get <S-mleid> env/temp con
+     ```[cite: 2]
+   * Toma el tiempo exacto hasta que la consola responda `ResponseTimeout` (error por falta de ACK)[cite: 1, 2].
+5. **TU COMPAÑERO (Placa S):** Vuelve a conectar la Placa S a la red[cite: 1, 2]:
+   ```bash
+   ot thread start
+   ```[cite: 1, 2]
+
+---
+
+### Fase 4: Parte 5 — Confiabilidad y Resiliencia (*Reliability*)
+
+#### Tarea 5.1 — Tasa de fallas en reposo (*Quiet*) vs con tráfico de radio (*Busy*)
+
+1. **Medición en Reposo (*Quiet*):**
+   * **TU COMPAÑERO (Placa S):** Reinicia los contadores de estadísticas[cite: 2]:
+     ```bash
+     soilsense reset
+     ```[cite: 2]
+     *(Esperen 2 minutos sin enviar comandos por red)*[cite: 2].
+   * Pasados los 2 minutos, tu compañero ejecuta[cite: 2]:
+     ```bash
+     soilsense stats
+     ```[cite: 2]
+     *(Anoten el total de lecturas e inconsistencias en reposo)*[cite: 2].
+
+2. **Medición bajo Carga de Radio (*Busy*):**
+   * **TU COMPAÑERO (Placa S):** Reinicia contadores nuevamente[cite: 2]:
+     ```bash
+     soilsense reset
+     ```[cite: 2]
+   * **TÚ (Placa C):** Genera tráfico continuo enviando 10 pings por segundo durante 2 minutos[cite: 2]:
+     ```bash
+     ot ping <S-mleid> 16 1200 0.1
+     ```
+   * **TU COMPAÑERO (Placa S):** Pasados los 2 minutos, ejecuta[cite: 2]:
+     ```bash
+     soilsense stats
+     ```[cite: 2]
+     *(Anoten la tasa de fallas bajo tráfico. Debido a que el protocolo 1-Wire del DS18B20 requiere tiempos precisos medidos por la CPU, las interrupciones de radio pueden corromper bits de datos)*[cite: 2].
+
+---
+
+### Fase 5: Consolidación de Datos para el Informe DDR
+
+Llenen la fila correspondiente a su pareja en la **Tabla de la Clase** con los datos recopilados[cite: 2]:
+
+| Parámetro | Valor para la Sonda DS18B20 |
+| :--- | :--- |
+| **Sensor** | DS18B20 (Steel probe)[cite: 2, 3] |
+| **Resolución** | `0.0625 °C`[cite: 2, 3] |
+| **Ruido (1 min)** | *(Medido en Tarea 3.1)*[cite: 2] |
+| **Offset vs Referencia** | *(Medido en Tarea 3.2)*[cite: 2] |
+| **Prueba de aliento (Subida / Medio tiempo)** | *(Medido en Tarea 3.3)*[cite: 2] |
+| **Notificaciones enviadas** | *(Conteo en Tarea 3.3)*[cite: 2] |
+| **Fallas Quiet vs Busy** | *(Resultados de `soilsense stats`)*[cite: 2] |
+| **¿Se recupera solo?** | Sí (al reconectar el cable o levantar Thread)[cite: 2]. |
+
+
+Asi debe compilar la PLACA S para que no sea simulado:
+
+west build -p always -b esp32c6_devkitc/esp32c6/hpcore . -- -DEXTRA_DTC_OVERLAY_FILE=sensors/ds18b20.overlay
+
+
+
+
+
+PLACA S:
+
+
+
+
+
+---- Sent utf8 encoded message: "ot factoryreset\n" ----
+ot factoryreset
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0xc (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4200df82
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0x13038
+load:0x40813050,len:0x3a2c
+SHA-256 comparison failed:
+Calculated: 8c6a33661fe97acce6ab179d6ae5efcc9d10e0ed6052abc0887d5c04538a968a
+Expected: 0000000060950000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40800294
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 13:48:56
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=13038h ( 77880)
+I (boot): DRAM  : lma=00013060h vma=40813050h size=03a2ch ( 14892)
+I (boot): DROM  : lma=00020000h vma=42800000h size=0e604h ( 58884)
+I (boot): IROM  : lma=00030000h vma=42000000h size=64c60h (412768)
+I (boot): libc heap size 308 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+PHY: libbtbb version: e4897a5, Apr 10 2026, 13:53:26
+
+[00:00:00.074,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.093,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.093,000] <inf> fs_nvs: alloc wra: 2, e88
+[00:00:00.093,000] <inf> fs_nvs: data wra: 2, 284
+[00:00:00.100,000] <inf> ieee802154_esp32: Iface initialized
+*** Booting Zephyr OS build v4.4.0-14199-g4c6971ba90a3 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.101,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.102,000] <inf> lab4_sensors: SoilSense node ready: CoAP /env/temp (ds18b20) and /act/valve on UDP 5683. OpenThread commands start with "ot".
+[00:00:00.102,000] <inf> reading: Reading ds18b20 every 2 s
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset set active <redactado>\n" ----
+ot dataset set active <redactado>
+<redactado>
+<redactado>
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:02:06.033,000] <inf> lab4_sensors: Thread role: detached
+[00:02:08.311,000] <inf> lab4_sensors: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fd8e:8e8e:8f98:9898:cd7e:da6f:e819:ceb6
+Done
+[00:02:38.903,000] <inf> lab4_sensors: Thread role: router
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense stats\n" ----
+soilsense stats
+sensor:    ds18b20
+last good: 24.75 C, 0 s ago
+reads:     90 in 178 s: 0 failed (0.0 %), 0 rejected
+read time: min 760653 us, avg 760878 us, max 779203 us
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log on \n" ----
+soilsense log on 
+[00:03:28.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:30.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:32.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:34.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:36.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:38.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:40.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:42.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:44.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:46.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:48.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:50.862,000] <inf> reading: ds18b20: 24.69 C
+[00:03:52.862,000] <inf> reading: ds18b20: 24.69 C
+[00:03:54.862,000] <inf> reading: ds18b20: 24.62 C
+[00:03:56.862,000] <inf> reading: ds18b20: 24.69 C
+[00:03:58.862,000] <inf> reading: ds18b20: 24.69 C
+[00:04:00.862,000] <inf> reading: ds18b20: 24.75 C
+[00:04:02.862,000] <inf> reading: ds18b20: 24.88 C
+[00:04:04.862,000] <inf> reading: ds18b20: 24.81 C
+[00:04:06.862,000] <inf> reading: ds18b20: 24.88 C
+[00:04:08.862,000] <inf> reading: ds18b20: 25.75 C
+[00:04:10.862,000] <inf> reading: ds18b20: 26.50 C
+[00:04:12.862,000] <inf> reading: ds18b20: 27.06 C
+[00:04:14.862,000] <inf> reading: ds18b20: 27.12 C
+[00:04:16.862,000] <inf> reading: ds18b20: 27.06 C
+[00:04:18.862,000] <inf> reading: ds18b20: 26.88 C
+[00:04:20.862,000] <inf> reading: ds18b20: 26.75 C
+[00:04:22.862,000] <inf> reading: ds18b20: 26.56 C
+[00:04:24.862,000] <inf> reading: ds18b20: 26.38 C
+[00:04:26.862,000] <inf> reading: ds18b20: 26.19 C
+[00:04:28.862,000] <inf> reading: ds18b20: 26.12 C
+[00:04:30.862,000] <inf> reading: ds18b20: 25.88 C
+[00:04:32.862,000] <inf> reading: ds18b20: 25.75 C
+[00:04:34.862,000] <inf> reading: ds18b20: 25.62 C
+[00:04:36.862,000] <inf> reading: ds18b20: 25.56 C
+[00:04:38.862,000] <inf> reading: ds18b20: 25.50 C
+[00:04:40.862,000] <inf> reading: ds18b20: 25.44 C
+[00:04:42.862,000] <inf> reading: ds18b20: 25.31 C
+[00:04:44.862,000] <inf> reading: ds18b20: 25.38 C
+[00:04:46.862,000] <inf> reading: ds18b20: 25.31 C
+[00:04:48.862,000] <inf> reading: ds18b20: 25.44 C
+[00:04:50.862,000] <inf> reading: ds18b20: 26.00 C
+[00:04:52.862,000] <inf> reading: ds18b20: 26.19 C
+[00:04:54.862,000] <inf> reading: ds18b20: 26.19 C
+[00:04:56.862,000] <inf> reading: ds18b20: 26.06 C
+[00:04:58.862,000] <inf> reading: ds18b20: 25.94 C
+[00:05:00.862,000] <inf> reading: ds18b20: 25.81 C
+[00:05:02.862,000] <inf> reading: ds18b20: 25.69 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log off\n" ----
+soilsense log off
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log on\n" ----
+soilsense log on
+[00:05:42.862,000] <inf> reading: ds18b20: 25.12 C
+[00:05:44.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:46.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:48.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:50.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:52.863,000] <inf> reading: ds18b20: 25.06 C
+[00:05:54.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:56.855,000] <err> reading: ds18b20 was not found at boot; fix the wiring, then reset the board
+[00:05:58.102,000] <wrn> reading: Read failed (-19) after 972 us
+[00:06:00.102,000] <err> reading: Sensor lost: 3 failed reads in a row; retrying every 2 s
+[00:06:20.862,000] <inf> reading: Sensor back after 12 failed reads
+[00:06:20.862,000] <inf> reading: ds18b20: 25.19 C
+[00:06:22.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:24.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:26.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:28.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:30.862,000] <inf> reading: ds18b20: 25.31 C
+[00:06:32.862,000] <inf> reading: ds18b20: 25.31 C
+[00:06:34.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:36.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:38.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:40.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:42.862,000] <inf> reading: ds18b20: 25.44 C
+[00:06:44.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:46.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:48.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:50.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:52.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:54.862,000] <inf> reading: ds18b20: 25.44 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log off\n" ----
+soilsense log off
+[00:06:56.862,000] <inf> reading: ds18b20: 25.44 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense reset\n" ----
+soilsense reset
+Counters zeroed
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense stats\n" ----
+soilsense stats
+sensor:    ds18b20
+last good: 25.06 C, 1 s ago
+reads:     4 in 9 s: 0 failed (0.0 %), 0 rejected
+read time: min 760653 us, avg 760670 us, max 760701 us
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log on\n" ----
+soilsense log on
+[00:08:12.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:14.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:16.863,000] <inf> reading: ds18b20: 25.19 C
+[00:08:18.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:20.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:22.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:24.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:26.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:28.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:30.863,000] <inf> reading: ds18b20: 25.12 C
+[00:08:32.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:34.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:36.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:38.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:40.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:42.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:44.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:46.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:48.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:50.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:52.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:54.862,000] <inf> reading: ds18b20: 25.06 C
+[00:08:56.862,000] <inf> reading: ds18b20: 25.06 C
+[00:08:58.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:00.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:02.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:04.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:06.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:08.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:10.862,000] <inf> reading: ds18b20: 25.12 C
+[00:09:12.862,000] <inf> reading: ds18b20: 25.12 C
+[00:09:14.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:16.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:18.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:20.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:22.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:24.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:26.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:28.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:30.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:32.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:34.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:36.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:38.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:40.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:42.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:44.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:46.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:48.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:50.862,000] <inf> reading: ds18b20: 24.94 C
+[00:09:52.862,000] <inf> reading: ds18b20: 24.94 C
+[00:09:54.862,000] <inf> reading: ds18b20: 24.94 C
+[00:09:56.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:58.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:00.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:02.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:04.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:06.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:08.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:10.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:12.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:14.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:16.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:18.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:20.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:22.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:24.862,000] <inf> reading: ds18b20: 25.25 C
+[00:10:26.862,000] <inf> reading: ds18b20: 25.69 C
+[00:10:28.862,000] <inf> reading: ds18b20: 26.19 C
+[00:10:30.862,000] <inf> reading: ds18b20: 26.44 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense stats\n" ----
+soilsense stats
+sensor:    ds18b20
+last good: 26.50 C, 0 s ago
+reads:     84 in 167 s: 0 failed (0.0 %), 0 rejected
+read time: min 760653 us, avg 760707 us, max 760956 us
+[00:10:32.862,000] <inf> reading: ds18b20: 26.50 C
+[00:10:34.862,000] <inf> reading: ds18b20: 26.44 C
+[00:10:36.862,000] <inf> reading: ds18b20: 26.31 C
+[00:10:38.862,000] <inf> reading: ds18b20: 26.19 C
+[00:10:40.862,000] <inf> reading: ds18b20: 26.06 C
+[00:10:42.862,000] <inf> reading: ds18b20: 26.00 C
+[00:10:44.862,000] <inf> reading: ds18b20: 25.88 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log off\n" ----
+soilsense log off
+uart:~$
+
+
+
+
+
+
+PLACA C:
+
+
+
+
+
+---- Opened the serial port /dev/tty.usbmodem5CBC0028321 ----
+---- Sent utf8 encoded message: "ot factoryreset\n" ----
+ot factoryreset
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0x1c (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4001975a
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0xfb2c
+load:0x4080fb40,len:0x38fc
+SHA-256 comparison failed:
+Calculated: 4b10c10d27636497aa01213a2bb38e8c1a6377cb280139516475f503ad3960c5
+Expected: 0000000090cb0000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40803af8
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 13:07:22
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=0fb2ch ( 64300)
+I (boot): DRAM  : lma=0000fb54h vma=4080fb40h size=038fch ( 14588)
+I (boot): IROM  : lma=00020000h vma=42800000h size=0d084h ( 53380)
+I (boot): IROM  : lma=00030000h vma=42000000h size=65710h (415504)
+I (boot): libc heap size 326 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(4096k) smaller than the size in the binary image header(8192k). Using detected size.
+PHY: libbtbb version: c493933, Nov 14 2025, 16:34:25
+
+[00:00:00.080,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.110,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.110,000] <inf> fs_nvs: alloc wra: 1, d00
+[00:00:00.110,000] <inf> fs_nvs: data wra: 1, 468
+*** Booting Zephyr OS build v4.4.2 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.124,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.125,000] <inf> lab4_sensors: SoilSense node ready: CoAP /env/temp (simulated) and /act/valve on UDP 5683. OpenThread commands start with "ot".
+[00:00:00.125,000] <inf> reading: Reading simulated every 2 s
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset init new\n" ----
+ot dataset init new
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset commit active\n" ----
+ot dataset commit active
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:02:01.154,000] <inf> lab4_sensors: Thread role: detached
+[00:02:03.339,000] <inf> lab4_sensors: Thread role: leader
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset active -x\n" ----
+ot dataset active -x
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap start\n" ----
+ot coap start
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap observe fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 env/temp\n" ----
+ot coap observe fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 env/temp
+Done
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=2 with payload: a16174f94de4
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=3 with payload: a16174f94e0a
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=4 with payload: a16174f94e32
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=5 with payload: a16174f94e5b
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=6 with payload: a16174f94e2b
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=7 with payload: a16174f94dff
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=8 with payload: a16174f94dde
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=9 with payload: a16174f94e0c
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=10 with payload: a16174f94e3f
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=11 with payload: a16174f94e65
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=12 with payload: a16174f94e43
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=13 with payload: a16174f94e1e
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=14 with payload: a16174f94df6
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=15 with payload: a16174f94e22
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=16 with payload: a16174f94e4a
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=17 with payload: a16174f94e1a
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=18 with payload: a16174f94df4
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=19 with payload: a16174f94e16
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=20 with payload: a16174f94e39
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=21 with payload: a16174f94e5b
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=22 with payload: a16174f94e2a
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=23 with payload: a16174f94e01
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=24 with payload: a16174f94ddb
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=25 with payload: a16174f94e04
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=26 with payload: a16174f94e24
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=27 with payload: a16174f94e47
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=28 with payload: a16174f94e24
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=29 with payload: a16174f94df6
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=30 with payload: a16174f94e17
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=31 with payload: a16174f94e3a
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=32 with payload: a16174f94e5d
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=33 with payload: a16174f94e37
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=34 with payload: a16174f94e0d
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=35 with payload: a16174f94de8
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=36 with payload: a16174f94e0c
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=37 with payload: a16174f94e3c
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=38 with payload: a16174f94e60
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=39 with payload: a16174f94e35
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=40 with payload: a16174f94e01
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=41 with payload: a16174f94dde
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=42 with payload: a16174f94dff
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=43 with payload: a16174f94e20
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=44 with payload: a16174f94e4b
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=45 with payload: a16174f94e2a
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=46 with payload: a16174f94e01
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=47 with payload: a16174f94de1
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=48 with payload: a16174f94e06
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=49 with payload: a16174f94e31
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=50 with payload: a16174f94e55
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=51 with payload: a16174f94e31
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=52 with payload: a16174f94e10
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=53 with payload: a16174f94dea
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=54 with payload: a16174f94e14
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=55 with payload: a16174f94e41
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=56 with payload: a16174f94e61
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=57 with payload: a16174f94e38
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=58 with payload: a16174f94e10
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=59 with payload: a16174f94de3
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=60 with payload: a16174f94e04
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=61 with payload: a16174f94e2b
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=62 with payload: a16174f94e4f
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=63 with payload: a16174f94e20
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=64 with payload: a16174f94dfc
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=65 with payload: a16174f94ddb
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=66 with payload: a16174f94e09
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=67 with payload: a16174f94e33
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=68 with payload: a16174f94e57
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=69 with payload: a16174f94e31
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=70 with payload: a16174f94e05
+coap response from fd8e:8e8e:8f98:9898:bedf:ceeb:557b:477 OBS=71 with payload: a16174f94ddd
+uart:~$ 

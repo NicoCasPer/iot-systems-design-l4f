@@ -8,6 +8,8 @@
 > Labs 1–4 are done in pairs. From Lab 5 on, this pair and Pair 2 work as one team: see [the team DDR](../labs5-8_equipo/DDR.md).
 >
 > **Sources.** Every number below comes from our lab reports (Labs 1–4, 22–23 Oct 2026), from the console photos in [`img/lab4/`](img/lab4/), or, where stated, from the course firmware. Original experimental values are retained. Additions distinguish **measured**, **calculated** (from recorded data and stated assumptions), **firmware-derived** (expected behavior), and **not measured** (missing experimental evidence). No simulated results are presented as measurements. The completion review uses the supplied `labs/lab1.md`–`lab4.md`, `firmware/lab1_radio`, `lab2_mesh`, `lab3_coap` and `lab4_sensors` sources; see §6.1–§6.4 for calculations, provenance and remaining evidence.
+>
+> **Archived raw transcripts.** The supplied lab notes and console outputs are now available in the [data inventory](../../datos/README.md): [Lab 1](../../datos/lab1/consola_radio.txt), [Lab 2 A](../../datos/lab2/consola_a.txt) / [B](../../datos/lab2/consola_b.txt), [Lab 3 S](../../datos/lab3/consola_s.txt) / [C](../../datos/lab3/consola_c.txt), and [Lab 4 S](../../datos/lab4/consola_s.txt) / [C](../../datos/lab4/consola_c.txt). Credentials are redacted; source line ranges and original attachment hashes are in [the provenance table](../../datos/procedencia.csv). Lab 3's repeated ping block is counted once. These transcripts preserve existing measurements rather than adding new experiments.
 
 ---
 
@@ -84,24 +86,28 @@ RSSI traffic light: **green** ≥ −80 dBm, LQ 2–3 · **yellow** −80 to −
     | **25, 26** | 2475, 2480 | — | Above Wi-Fi 11 |
 
     Consequences: a channel change on a deployed network must be pushed from the leader with a pending dataset, never node by node. Follow-up: run `ot scan energy 500` on the real site and pick the quietest gap channel.
+*   **Recorded evidence:** [Lab 1 radio console](../../datos/lab1/consola_radio.txt) records channel 23, +20 dBm, pings and neighbor RSSI; it contains no energy-scan results.
 *   **Status:** [x] Proposed | [ ] Accepted | [ ] Deprecated — accepted provisionally for testing; to be confirmed with an on-site energy scan.
 
 **ADR-002: Thread mesh, not a star, for the field**
 *   **Context:** Nodes must last 3 months on 2× AA (3 Ah × 3 V = 32.4 kJ → **≈4.2 mW average**), cover 10 ha, and keep working if one node fails.
 *   **Decision:** Thread mesh over IEEE 802.15.4, with router-capable nodes, instead of a single-gateway star (Wi-Fi AP or a LoRaWAN-style gateway).
 *   **Rationale:** Wi-Fi at ≈600 mW active exceeds the budget even at 1 % duty cycle (6 mW). 802.15.4 at ≈60 mW allows up to ≈7 % duty cycle (order-of-magnitude figures from the lab guide, not our measurements). A mesh has no single radio point of failure: routers re-route and the leader is re-elected. A star (Wi-Fi or LoRaWAN) loses the whole zone with its gateway. Our evidence is partial: per-hop RTT of ≈16 ms (Lab 2) is negligible for irrigation, but **we did not measure healing time**, so the self-healing claim still needs a timed test. The fallback if Lab 1's range stays short is LoRa (sub-GHz, longer range, star topology).
+*   **Recorded evidence:** [Lab 2 A](../../datos/lab2/consola_a.txt) and [B](../../datos/lab2/consola_b.txt) record ping results, roles and MAC counters. The relay-removal instant remains unrecorded, so they do not establish healing time.
 *   **Status:** [x] Proposed | [ ] Accepted | [ ] Deprecated — pending a healing-time measurement.
 
 **ADR-003: CoAP + CBOR for uplink and downlink**
 *   **Context:** S must publish temperature and accept valve commands over a 127-byte 802.15.4 frame, from battery-powered nodes.
 *   **Decision:** CoAP over UDP (port 5683) with CBOR payloads: `/env/temp` (GET + Observe) and `/act/valve` (PUT + GET), commands sent as CON.
 *   **Rationale:** Byte budget from our logs: Observe notifications were **19 B** of CoAP, valve responses **13 B**, requests **15–18 B**. That fits in one frame after 6LoWPAN compression, with no fragmentation. HTTP needs TCP (handshake, per-segment ACKs, text headers) on a lossy, sleepy link. MQTT also runs over TCP and needs a broker, so every node would talk to a central component instead of being addressable itself; it fits better on the IP side of a border router (Lab 5+) than on the radio side. CON gives commands an end-to-end confirmation (`2.04` or a timeout); Observe removes polling.
+*   **Recorded evidence:** [Lab 3 S](../../datos/lab3/consola_s.txt) records response sizes, 34 threshold notifications, valve PUTs and rejection with `4.00`; [C](../../datos/lab3/consola_c.txt) records subscriptions, responses and timeouts.
 *   **Status:** [ ] Proposed | [x] Accepted | [ ] Deprecated
 
 **ADR-004: Poll period for battery-powered valves**
 *   **Context:** A sleepy end device (SED) only receives when it polls its parent, so the poll period trades latency for radio-on time.
 *   **Decision:** **5 s** poll period for valve nodes.
 *   **Rationale:** Measured with S as SED (10 pings per condition, ICMP): 1 s → 529.8 ms average, 40 % loss; **5 s → 3,267 ms average, max 4,988 ms, 10 % loss**; 15 s → 7,642 ms average, max 13,368 ms. The maximum observed successful ICMP reply at 5 s was below 5 s, while polling was 5× less frequent than at 1 s; this is not a guaranteed command deadline, particularly with one missing reply. The loss figures are not conclusive (10 pings, S changed role during the series). **Calculated polling-only energy model:** 0.2 % radio-on fraction at 5 s; idealized average 0.155 mA using the guide's two-state model. This does not establish board autonomy — see §6.1.
+*   **Recorded evidence:** [S](../../datos/lab3/consola_s.txt) records the poll settings and [C](../../datos/lab3/consola_c.txt) records the three ping series. The final repeated copy in the [complete notes](../../datos/lab3/apuntes_y_consola.txt) is not another trial.
 *   **Status:** [x] Proposed | [ ] Accepted | [ ] Deprecated
 
 ---
@@ -228,6 +234,8 @@ Link budget: Ptx +20 dBm, antenna gains ≈2 dBi each, sensitivity ≈−100 dBm
 
 **Lab 4 acquisition timing** (`soilsense stats`, S with DS18B20): one read every 2 s; read time min 760.7 ms, mean **760.9 ms** (38 % of the period), max 779.2 ms — consistent with a 12-bit DS18B20 conversion (up to ≈750 ms). Still-air variation over 20 samples: 24.62–24.88 °C, σ ≈ 0.086 °C (not a calibration). A warm-air transient raised the reading **+2.24 °C** (24.88 → 27.12 °C) and crossed back under the half-way level 14–16 s after the peak.
 
+The [S console](../../datos/lab4/consola_s.txt) and its [151-reading CSV extraction](../../datos/lab4/lecturas_ds18b20.csv) preserve the temperature series, statistics and lost/back events. Each CSV row points to its line in the complete notes. S's shown ML-EID and C's Observe destination differ in the supplied Lab 4 transcript, so those two streams are not treated as a synchronized sensor-to-client measurement.
+
 
 ### 6.1 Calculated polling latency and energy budget
 
@@ -278,8 +286,8 @@ This inventory completes the documentation of each gap without assigning an unsu
 | Lab 3: Observe comparison | 34 updates in ≈330 s = ≈6.18 updates/min; ≈330 GETs at 1 Hz / 34 updates = **9.7×** request-count-to-update-count ratio. | A separate exact 300 s count if reporting the guide's five-minute table. This ratio excludes subscription, responses, ACKs and retries and is not an energy measurement. |
 | Lab 3: duplicate delivery in five PUTs | Idempotent state-setting supported; identical Message ID delivery not established. | Five timestamped CON PUTs at 5 s poll, with Message IDs and server receptions; configured client timers. |
 | Labs 3–4: dashboard interaction | Existing console/LED evidence retained; dashboard evidence not attached here. | Chart/valve screenshot with matching PUT log; sensor-loss screenshot and time to visible indication. |
-| Lab 4: resolution and reference offset | 0.26 °C recorded spread and σ ≈0.086 °C describe variation, not accuracy or the smallest sensor step. | Raw one-minute series for empirical step size; simultaneous reference reading and offset = sensor − reference. |
-| Lab 4: breath response and plausibility injections | Rise +2.24 °C and 14–16 s decay half-time retained; decay is not the requested rising half-time. Validation rules are known from code. | Timestamped rising curve, notification count and actual logs for injected 90, 31.5 and 25.5 °C; acceptance depends on the preceding value and age. |
+| Lab 4: resolution and reference offset | Raw DS18B20 samples are now attached as console and CSV. The existing 0.26 °C spread and σ ≈0.086 °C describe variation, not accuracy or a calibrated resolution. | Review empirical step size from the recorded series; simultaneous reference reading and offset = sensor − reference remain missing. |
+| Lab 4: breath response and plausibility injections | Timestamped temperature series now attached; rise +2.24 °C and 14–16 s decay half-time retained. Decay is not the requested rising half-time. Validation rules are known from code. | Identify the stimulus-onset instant and match notifications to the real sensor; actual logs for injected 90, 31.5 and 25.5 °C are still needed. Acceptance depends on the preceding value and age. |
 | Lab 4: lost sensor and lost node at client | Local 5.2 s and Lab 3 timeout retained; expiry behavior explained in §6.2. | Extended outage with client `5.03` capture and independently timed Lab 4 node-unreachable CON GET. |
 | Lab 4: quiet/busy failure comparison | 0/90 and 0/84 are valid recorded windows with unlabelled radio load; neither can be relabelled from firmware. | Two labelled 120 s windows after counter resets, quiet and 10 pings/s, with read/failure counters. |
 | Lab 4: recovery, reboot and class comparison | Probe recovery logged; readings, counters and observers are in RAM; dataset persistence is configured through NVS. | Reconnection timestamp, reboot trace showing actual restoration, and shared class table including this pair's row. |
@@ -292,6 +300,7 @@ The supplied course checkout is `4201327-iot_systems_design-main` in Downloads. 
 
 | Source | What it establishes |
 |---|---|
+| [Archived notes and console extracts, Labs 1–4](../../datos/README.md); [provenance](../../datos/procedencia.csv) | Original reported outputs for RSSI, pings, roles, MAC counters, CoAP exchanges and sensor readings. Instructions and repeated blocks are distinguished from measurements; no new experimental values are introduced. |
 | `labs/lab1.md`–`labs/lab4.md` | Required experiments, quantities, comparison windows and targets used in §6.3. |
 | `firmware/lab1_radio/src/main.c`; `lab2_mesh/src/main.c` | Radio-ready log and Thread-role LED handling; routing and healing are delegated to OpenThread, not specified as fixed delays here. |
 | `firmware/lab3_coap/src/env_temp.c` | Simulated temperature 24.5 + sin(2πt/60) + noise (approximately ±0.1 °C), sampled nominally each second; Observe threshold >0.5 °C and heartbeat 45 s. |

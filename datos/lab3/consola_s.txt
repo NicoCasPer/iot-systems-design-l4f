@@ -1,0 +1,321 @@
+PLACA S:
+
+
+---- Opened the serial port /dev/ttyACM0 ----
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0x1 (POWERON),boot:0x1c (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0x12854
+load:0x40812870,len:0x3974
+SHA-256 comparison failed:
+Calculated: c8a76653a2b0ac65f9fbd0edd95d06a236d78df781800e3f6d50cfdfe72f5819
+Expected: 00000000f09d0000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40800294
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 11:25:50
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=12854h ( 75860)
+I (boot): DRAM  : lma=0001287ch vma=40812870h size=03974h ( 14708)
+I (boot): DROM  : lma=00020000h vma=42800000h size=0e184h ( 57732)
+I (boot): IROM  : lma=00030000h vma=42000000h size=63980h (407936)
+I (boot): libc heap size 313 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+PHY: libbtbb version: e4897a5, Apr 10 2026, 13:53:26
+
+[00:00:00.070,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.089,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.089,000] <inf> fs_nvs: alloc wra: 1, f18
+[00:00:00.089,000] <inf> fs_nvs: data wra: 1, 2a0
+[00:00:00.941,000] <inf> ieee802154_esp32: Iface initialized
+*** Booting Zephyr OS build v4.4.0-14199-g4c6971ba90a3 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.942,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.943,000] <inf> lab3_coap: SoilSense node ready: CoAP /env/temp and /act/valve on UDP 5683. OpenThread commands start with "ot".
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset set active <redactado>\n" ----
+ot dataset set active <redactado>
+<redactado>
+<redactado>
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:02:05.790,000] <inf> lab3_coap: Thread role: detached
+[00:02:20.313,000] <inf> lab3_coap: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+Done
+[00:04:04.026,000] <inf> env_temp: GET /env/temp from fda6:239b:22f7:f7f8:e86d:d66f:a520:9b22: 2.05, 24.80 C, CoAP 17 B (CBOR a16174f94e33), request 15 B
+[00:04:30.184,000] <inf> env_temp: GET /env/temp from fda6:239b:22f7:f7f8:e86d:d66f:a520:9b22 (observe): 2.05, 24.57 C, CoAP 19 B (CBOR a16174f94e24), request 16 B
+[00:04:35.449,000] <inf> env_temp: notify (threshold, NON): T=23.97 C, delta=0.60 C, 5s since last, CoAP 19 B [threshold 1, heartbeat 0]
+[00:04:43.458,000] <inf> env_temp: notify (threshold, NON): T=23.43 C, delta=0.54 C, 8s since last, CoAP 19 B [threshold 2, heartbeat 0]
+[00:04:53.469,000] <inf> env_temp: notify (threshold, NON): T=23.94 C, delta=0.51 C, 10s since last, CoAP 19 B [threshold 3, heartbeat 0]
+[00:05:00.477,000] <inf> env_temp: notify (threshold, NON): T=24.50 C, delta=0.57 C, 7s since last, CoAP 19 B [threshold 4, heartbeat 0]
+[00:05:05.483,000] <inf> env_temp: notify (threshold, NON): T=25.10 C, delta=0.59 C, 5s since last, CoAP 19 B [threshold 5, heartbeat 0]
+[00:05:29.508,000] <inf> env_temp: notify (threshold, NON): T=24.46 C, delta=0.64 C, 24s since last, CoAP 19 B [threshold 6, heartbeat 0]
+[00:05:36.516,000] <inf> env_temp: notify (threshold, NON): T=23.95 C, delta=0.51 C, 7s since last, CoAP 19 B [threshold 7, heartbeat 0]
+[00:05:45.526,000] <inf> env_temp: notify (threshold, NON): T=23.43 C, delta=0.52 C, 9s since last, CoAP 19 B [threshold 8, heartbeat 0]
+[00:05:55.537,000] <inf> env_temp: notify (threshold, NON): T=24.11 C, delta=0.68 C, 10s since last, CoAP 19 B [threshold 9, heartbeat 0]
+[00:06:00.543,000] <inf> env_temp: notify (threshold, NON): T=24.61 C, delta=0.50 C, 5s since last, CoAP 19 B [threshold 10, heartbeat 0]
+[00:06:06.550,000] <inf> env_temp: notify (threshold, NON): T=25.13 C, delta=0.52 C, 6s since last, CoAP 19 B [threshold 11, heartbeat 0]
+[00:06:29.574,000] <inf> env_temp: notify (threshold, NON): T=24.47 C, delta=0.66 C, 23s since last, CoAP 19 B [threshold 12, heartbeat 0]
+[00:06:36.582,000] <inf> env_temp: notify (threshold, NON): T=23.95 C, delta=0.52 C, 7s since last, CoAP 19 B [threshold 13, heartbeat 0]
+[00:06:43.590,000] <inf> env_temp: notify (threshold, NON): T=23.43 C, delta=0.51 C, 7s since last, CoAP 19 B [threshold 14, heartbeat 0]
+[00:06:55.603,000] <inf> env_temp: notify (threshold, NON): T=24.07 C, delta=0.64 C, 12s since last, CoAP 19 B [threshold 15, heartbeat 0]
+[00:07:00.609,000] <inf> env_temp: notify (threshold, NON): T=24.64 C, delta=0.56 C, 5s since last, CoAP 19 B [threshold 16, heartbeat 0]
+[00:07:06.616,000] <inf> env_temp: notify (threshold, NON): T=25.19 C, delta=0.55 C, 6s since last, CoAP 19 B [threshold 17, heartbeat 0]
+[00:07:28.639,000] <inf> env_temp: notify (threshold, NON): T=24.61 C, delta=0.58 C, 22s since last, CoAP 19 B [threshold 18, heartbeat 0]
+[00:07:33.645,000] <inf> env_temp: notify (threshold, NON): T=24.06 C, delta=0.55 C, 5s since last, CoAP 19 B [threshold 19, heartbeat 0]
+[00:07:41.654,000] <inf> env_temp: notify (threshold, NON): T=23.47 C, delta=0.58 C, 8s since last, CoAP 19 B [threshold 20, heartbeat 0]
+[00:07:54.668,000] <inf> env_temp: notify (threshold, NON): T=24.00 C, delta=0.53 C, 13s since last, CoAP 19 B [threshold 21, heartbeat 0]
+[00:08:00.675,000] <inf> env_temp: notify (threshold, NON): T=24.60 C, delta=0.60 C, 6s since last, CoAP 19 B [threshold 22, heartbeat 0]
+[00:08:02.905,000] <inf> lab3_coap: Thread role: router
+[00:08:05.681,000] <inf> env_temp: notify (threshold, NON): T=25.15 C, delta=0.55 C, 5s since last, CoAP 19 B [threshold 23, heartbeat 0]
+[00:08:28.705,000] <inf> env_temp: notify (threshold, NON): T=24.62 C, delta=0.53 C, 23s since last, CoAP 19 B [threshold 24, heartbeat 0]
+[00:08:34.712,000] <inf> env_temp: notify (threshold, NON): T=24.05 C, delta=0.57 C, 6s since last, CoAP 19 B [threshold 25, heartbeat 0]
+[00:08:40.719,000] <inf> env_temp: notify (threshold, NON): T=23.50 C, delta=0.55 C, 6s since last, CoAP 19 B [threshold 26, heartbeat 0]
+[00:08:55.735,000] <inf> env_temp: notify (threshold, NON): T=24.11 C, delta=0.61 C, 15s since last, CoAP 19 B [threshold 27, heartbeat 0]
+[00:09:01.742,000] <inf> env_temp: notify (threshold, NON): T=24.62 C, delta=0.51 C, 6s since last, CoAP 19 B [threshold 28, heartbeat 0]
+[00:09:06.748,000] <inf> env_temp: notify (threshold, NON): T=25.22 C, delta=0.60 C, 5s since last, CoAP 19 B [threshold 29, heartbeat 0]
+[00:09:27.770,000] <inf> env_temp: notify (threshold, NON): T=24.67 C, delta=0.55 C, 21s since last, CoAP 19 B [threshold 30, heartbeat 0]
+[00:09:33.777,000] <inf> env_temp: notify (threshold, NON): T=24.05 C, delta=0.62 C, 6s since last, CoAP 19 B [threshold 31, heartbeat 0]
+[00:09:40.785,000] <inf> env_temp: notify (threshold, NON): T=23.50 C, delta=0.55 C, 7s since last, CoAP 19 B [threshold 32, heartbeat 0]
+[00:09:55.801,000] <inf> env_temp: notify (threshold, NON): T=24.17 C, delta=0.67 C, 15s since last, CoAP 19 B [threshold 33, heartbeat 0]
+[00:10:01.808,000] <inf> env_temp: notify (threshold, NON): T=24.74 C, delta=0.57 C, 6s since last, CoAP 19 B [threshold 34, heartbeat 0]
+[00:10:03.118,000] <inf> env_temp: GET /env/temp from fda6:239b:22f7:f7f8:e86d:d66f:a520:9b22 (cancel): 2.05, 24.87 C, CoAP 17 B (CBOR a16174f94e38), request 17 B
+[00:23:38.503,000] <inf> valve: PUT /act/valve from fda6:239b:22f7:f7f8:e86d:d66f:a520:9b22 (CON): OPEN -> 2.04, CoAP 13 B, request 18 B
+[00:24:56.047,000] <inf> valve: GET /act/valve from fda6:239b:22f7:f7f8:e86d:d66f:a520:9b22: OPEN -> 2.05, CoAP 13 B, request 16 B
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+router
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod\n" ----
+ot pollperiod
+236000
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod 1000\n" ----
+ot pollperiod 1000
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+router
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot mode\n" ----
+ot mode
+rdn
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod 0\n" ----
+ot pollperiod 0
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+Done
+[00:38:19.173,000] <inf> lab3_coap: Thread role: detached
+[00:38:21.444,000] <inf> lab3_coap: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+child
+Done
+[00:40:15.181,000] <inf> lab3_coap: Thread role: router
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+router
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot extaddr\n" ----
+ot extaddr
+36a9c06d2ab7de72
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot factoryreset\n" ----
+ot factoryreset
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0x1c (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4200d272
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0x12854
+load:0x40812870,len:0x3974
+SHA-256 comparison failed:
+Calculated: c8a76653a2b0ac65f9fbd0edd95d06a236d78df781800e3f6d50cfdfe72f5819
+Expected: 00000000f09d0000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40800294
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 11:25:50
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=12854h ( 75860)
+I (boot): DRAM  : lma=0001287ch vma=40812870h size=03974h ( 14708)
+I (boot): DROM  : lma=00020000h vma=42800000h size=0e184h ( 57732)
+I (boot): IROM  : lma=00030000h vma=42000000h size=63980h (407936)
+I (boot): libc heap size 313 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+PHY: libbtbb version: e4897a5, Apr 10 2026, 13:53:26
+
+[00:00:00.073,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.088,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.088,000] <inf> fs_nvs: alloc wra: 1, d98
+[00:00:00.088,000] <inf> fs_nvs: data wra: 1, 5e0
+[00:00:00.096,000] <inf> ieee802154_esp32: Iface initialized
+*** Booting Zephyr OS build v4.4.0-14199-g4c6971ba90a3 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.096,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.097,000] <inf> lab3_coap: SoilSense node ready: CoAP /env/temp and /act/valve on UDP 5683. OpenThread commands start with "ot".
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset set active <redactado>\n" ----
+ot dataset set active <redactado>
+<redactado>
+<redactado>
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:00:39.062,000] <inf> lab3_coap: Thread role: detached
+[00:00:40.265,000] <inf> lab3_coap: Thread role: child
+[00:01:01.372,000] <inf> lab3_coap: Thread role: router
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fd11:942f:9664:6464:9045:59d0:b2ab:6101
+Done
+[00:04:39.260,000] <inf> valve: PUT /act/valve from fd11:942f:9664:6464:9c19:ad14:aa2f:942e (CON): OPEN -> 2.04, CoAP 13 B, request 18 B
+[00:05:23.186,000] <inf> valve: GET /act/valve from fd11:942f:9664:6464:9c19:ad14:aa2f:942e: OPEN -> 2.05, CoAP 13 B, request 16 B
+[00:05:32.478,000] <inf> valve: PUT /act/valve from fd11:942f:9664:6464:9c19:ad14:aa2f:942e (CON): CLOSED -> 2.04, CoAP 13 B, request 18 B
+[00:06:06.047,000] <inf> valve: PUT /act/valve from fd11:942f:9664:6464:9c19:ad14:aa2f:942e (CON): OPEN -> 2.04, CoAP 13 B, request 18 B
+[00:07:37.794,000] <wrn> valve: PUT /act/valve from fd11:942f:9664:6464:9c19:ad14:aa2f:942e: payload not {"v": 0|1} or "0"/"1" -> 4.00
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread stop\n" ----
+ot thread stop
+Done
+[00:08:08.268,000] <inf> lab3_coap: Thread role: disabled
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:11:57.405,000] <inf> lab3_coap: Thread role: detached
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+detached
+Done
+[00:12:11.677,000] <inf> lab3_coap: Thread role: leader
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+leader
+Done
+[00:13:36.297,000] <inf> lab3_coap: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+child
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fd11:942f:9664:6464:9045:59d0:b2ab:6101
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot mode -\n" ----
+ot mode -
+Done
+[00:14:55.278,000] <inf> lab3_coap: Thread role: detached
+[00:14:57.761,000] <inf> lab3_coap: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod 1000\n" ----
+ot pollperiod 1000
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+child
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod 5000\n" ----
+ot pollperiod 5000
+Done
+[00:17:49.231,000] <inf> lab3_coap: Thread role: detached
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+detached
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+detached
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+detached
+Done
+[00:19:23.910,000] <inf> lab3_coap: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+child
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod 15000\n" ----
+ot pollperiod 15000
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+child
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot pollperiod 5000\n" ----
+ot pollperiod 5000
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+child
+Done
+[00:24:42.237,000] <inf> valve: PUT /act/valve from fd11:942f:9664:6464:9c19:ad14:aa2f:942e (CON): OPEN, no change -> 2.04, CoAP 13 B, request 18 B
+[00:25:25.766,000] <inf> lab3_coap: Thread role: detached

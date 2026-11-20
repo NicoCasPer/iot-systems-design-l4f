@@ -10,6 +10,8 @@
 > Labs 1–4 were done in pairs; their records are in [Pair 1's DDR](../labs1-4_pareja1/DDR.md) and [Pair 2's DDR](../labs1-4_pareja2/DDR.md). Measurements this DDR compares against (for example the in-mesh RTT of earlier labs) come from there.
 >
 > **Sources.** Lab 5 numbers come from the console output of the four boards on 29 Oct 2026 and from the photos in [`img/lab5/`](img/lab5/). Times on the Ubuntu laptop (dashboard, VS Code) run about one hour ahead of the phone and the Mac; we quote each time as its device showed it.
+>
+> **Archived records.** The supplied [Task A console fragment](../../datos/lab5/consola_tarea_a.txt) is archived with the [complete notes](../../datos/lab5/apuntes_y_consola.txt). Its PSRAM/version output matches Task A below. Tasks B–F in those notes contain instructions, not additional measurement logs. The [data inventory](../../datos/README.md) also identifies the later November console capture and keeps it separate from the October results.
 
 ---
 
@@ -59,6 +61,7 @@ Both OTBR firmwares were built with the course's pinned Zephyr (`v4.4.0-13939-g2
     *   **Power save must be off.** With it on, the same Wi-Fi hop took **385.1 ms with 30 % loss** (216.4 ms in an earlier run), 23× slower than with it off.
     *   **It is a single point of failure only for off-mesh access.** With the OTBR unplugged, C → S `PUT /act/valve` (mesh-local address) still answered `2.04` immediately, while the laptop's GET failed with `ConRetransmitsExceeded` after **94 s**. After reconnection the OTBR rejoined in ≈40 s as a child of the surviving partition, with the **same OMR prefix and IPv4**, so clients needed no change.
     *   A second OTBR would remove the remote-access outage but doubles cost and adds prefix/leader arbitration. For a pilot, an outage of remote reads while local control keeps working is acceptable.
+*   **Recorded evidence:** the [Task A fragment](../../datos/lab5/consola_tarea_a.txt) records host/RCP versions and PSRAM; the latency, NAT64 and failure measurements are documented in Tasks D–F below with their console excerpts and photos. The independent full October console capture is not available.
 *   **Status:** [ ] Proposed | [x] Accepted | [ ] Deprecated
 
 **ADR-___: [Title]**

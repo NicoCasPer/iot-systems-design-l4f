@@ -1,0 +1,11 @@
+I (esp_psram): Found 8MB PSRAM device
+*** Booting Zephyr OS build v4.4.0-13939-g2f0bc11264a8 ***
+
+uart:~$ ot rcp version
+OPENTHREAD/e4d97681c; Zephyr; Oct 29 2026 09:16:26
+Done
+uart:~$ ot version
+OPENTHREAD/e4d97681c; Zephyr; Oct 29 2026 09:18:19
+Done
+uart:~$ ot state
+disabled

@@ -1,0 +1,171 @@
+IOT LAB 5
+
+
+
+Tarea A: armar el Border Router (compañero)
+1. Compañero, cableado con todo desconectado. S3 TX → C6 RX, S3 RX → C6 TX y GND con GND. Los pines son los de uart1 del overlay de lab5_rcp y los que indique la SOP para el S3.
+2. Compañero, energizar. Primero el C6 y después el S3. Si lo hacen al revés, el S3 se cae por el UART.
+3. Compañero, abrir la consola del S3:
+
+bash
+   west espressif monitor --port <puerto-S3>
+1. Compañero · S3: comprobar que el S3 habla con el RCP. Si este responde, el UART funciona.
+
+   ot rcp version
+1. Compañero · S3: versión de OpenThread en el host. Guarden la salida de este y del anterior como evidencia A.
+
+   ot version
+
+Tarea B: Wi-Fi y red Thread (compañero)
+1. Compañero · S3: conectarse al hotspot (2.4 GHz, WPA2). -k 1 significa WPA2-PSK.
+
+   wifi connect -s "<SSID>" -p "<clave>" -k 1
+1. Compañero · S3: comprobar la conexión y anotar la IPv4 del OTBR.
+
+   wifi status
+   net iface
+1. Compañero · S3: crear la red Thread en el canal que asigne el profe. Pongan un nombre y un PAN ID propios para no chocar con otras parejas.
+
+   ot dataset init new
+   ot dataset channel <15|20|25|26>
+   ot dataset panid 0x<4 dígitos hex>
+   ot dataset networkname <nombre-pareja>
+   ot dataset commit active
+   ot ifconfig up
+   ot thread start
+1. Compañero · S3: esperar unos 10 s y comprobar el rol. Debe decir leader.
+
+   ot state
+1. Compañero · S3: comprobar el border routing. Debe decir running.
+
+    ot br state
+1. Compañero · S3: ver el prefijo OMR. Será un fd…/64, una ULA, porque el hotspot no delega prefijo.
+
+    ot br omrprefix
+1. Compañero · S3: ver los datos de red: el prefijo OMR con sus flags y la ruta NAT64 /96.
+
+    ot netdata show
+
+Si no aparece ninguna ruta NAT64, prueben `ot nat64 enable` y repitan este paso. Revisen qué dice la SOP sobre esto.
+**Evidencia B:** salidas de los pasos 7, 9, 10 y 12.
+13. Compañero · S3: sacar el dataset en hex y pasárselo a Nico. Es el valor más importante del lab.
+
+    ot dataset active -x
+
+Tarea C: pasar S y C a la red del OTBR (Nico)
+Repite los pasos 14 a 16 en S y luego en C.
+1. Nico · S y C: borrar la red del Lab 4. Sin esto, cada placa vuelve a su rol viejo y forma su propia partición. La placa se reinicia; espera a que vuelva el prompt.
+
+    ot factoryreset
+1. Nico · S y C: cargar el dataset del OTBR.
+
+    ot dataset set active <hex-del-paso-13>
+    ot ifconfig up
+    ot thread start
+1. Nico · S y C: comprobar el rol. Primero sale child y en uno o dos minutos puede pasar a router.
+
+    ot state
+1. Nico · S: ver las direcciones. Debe haber una más que en el Lab 4: la OMR, que S armó por SLAAC con el prefijo que anunció el OTBR. Anota la S OMR.
+
+    ot ipaddr
+1. Nico · S: sacar la S ML-EID, que se usa en las Tareas C y F.
+
+    ot ipaddr mleid
+
+Para anotar el `ipaddr` como evidencia: `fe80…` es link-local, `fd…:0:ff:fe00:xxxx` es RLOC, el otro `fd…` de la mesh es ML-EID, y la que empieza con el prefijo del paso 11 es la OMR.
+19. Nico · C: RTT dentro de la malla, de C a S, con 10 pings. Usa el mismo tamaño que en el Lab 3.
+
+    ot ping <S-ML-EID> <tamaño> 10
+1. Compañero · S3: ver que S y C cuelgan del OTBR. Evidencia C: estas dos tablas y el ipaddr anotado.
+
+    ot child table
+    ot router table
+
+Tarea D: alcanzar S desde fuera (Nico en el portátil y compañero en el S3)
+1. Nico · portátil: conectar el Mac al mismo hotspot.
+2. Nico · portátil: buscar la ruta al prefijo OMR. Debe salir vía la link-local del OTBR en en0, instalada por el Router Advertisement del OTBR (Route Information Option, RFC 4191). Anota la link-local del OTBR.
+
+bash
+    netstat -rn -f inet6 | grep -i <primeros-bloques-del-prefijo-OMR>
+
+Si la ruta no aparece, agrégala a mano y anoten en el DDR que macOS no la aprendió sola:
+
+bash
+    sudo route -n add -inet6 <prefijo-OMR>/64 <link-local-OTBR>%en0
+1. Nico · portátil: ping al OTBR con power save activo. Anota el promedio.
+
+bash
+    ping -c 10 <IPv4-OTBR>
+1. Compañero · S3: apagar el ahorro de energía del Wi-Fi.
+
+    wifi ps off
+1. Nico · portátil: repetir el ping, ahora con power save apagado.
+
+bash
+    ping -c 10 <IPv4-OTBR>
+1. Nico · portátil: ping a S a través del OTBR.
+
+bash
+    ping6 -c 10 <S-OMR>
+1. Nico · portátil: 10 GETs CoAP a /env/temp. Anota la mediana; la meta es < 200 ms. Si el script no acepta --host, revisa --help.
+
+bash
+    python tools/coap_client.py --host <S-OMR> --count 10
+1. Nico · portátil: levantar el dashboard. El script imprime una URL: ábrela en el celular, cambiando localhost por la IP del Mac en el hotspot.
+
+bash
+    python tools/dashboard_coap.py --host <S-OMR>
+1. Nico · celular: abrir y cerrar la válvula desde el dashboard. Mientras tanto, en la consola de S, captura la línea del log del PUT /act/valve.
+Evidencia D: la ruta del paso 22, los 4 RTT (pasos 23, 25, 26 y 27), una foto del celular con la gráfica y el log de S. Latencia que agrega el OTBR = (paso 26 o 27) − (paso 25). La meta es < 100 ms.
+
+Tarea E: NAT64 (Nico)
+1. Nico · S: ping de S a 8.8.8.8. Anota la dirección sintetizada que imprime y el RTT promedio; la meta es < 200 ms.
+
+    ot ping 8.8.8.8 32 10
+1. Nico · S (o el compañero en el S3): buscar en los datos de red la ruta /96 cuyo prefijo coincide con la dirección sintetizada. Es la de flag n. Evidencia E: el ping y esa línea.
+
+    ot netdata show
+
+Tarea F: apagar el Border Router (los dos)
+1. Nico · S y C: anotar el estado antes de apagar el OTBR.
+
+    ot state
+1. Compañero: desconectar el S3 y anotar la hora.
+2. Nico · C: mandar el PUT a la válvula de S por la ML-EID. Usa el mismo comando y el mismo payload de la Tarea D del Lab 3. Debe funcionar.
+
+    ot coap start
+    ot coap put <S-ML-EID> act/valve con <payload-del-Lab-3>
+1. Nico · portátil: repetir el GET del paso 27. Debe fallar: anota el error y cuánto tarda en fallar.
+2. Nico · S y C: ver si alguno se volvió leader.
+
+    ot state
+
+**Evidencia F:** la respuesta de C al `PUT`, el error del portátil y el log de S.
+37. Compañero, restaurar. Energizar primero el C6 y después el S3. En la consola del S3:
+
+    wifi connect -s "<SSID>" -p "<clave>" -k 1
+    ot ifconfig up
+    ot thread start
+    ot state
+    ot br state
+
+Anoten si **vuelve como líder** o entra como router a la partición que ya formaron S y C. Esa es la pregunta de la tarea.
+
+
+TAREA A:
+
+
+I (esp_psram): Found 8MB PSRAM device
+*** Booting Zephyr OS build v4.4.0-13939-g2f0bc11264a8 ***
+
+uart:~$ ot rcp version
+OPENTHREAD/e4d97681c; Zephyr; Oct 29 2026 09:16:26
+Done
+uart:~$ ot version
+OPENTHREAD/e4d97681c; Zephyr; Oct 29 2026 09:18:19
+Done
+uart:~$ ot state
+disabled
+
+
+

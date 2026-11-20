@@ -1,0 +1,618 @@
+PLaca A
+
+placa A
+---- Opened the serial port /dev/ttyACM0 ----
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+disabled
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:07:54.394,000] <inf> lab2_mesh: Thread role: detached
+[00:08:08.874,000] <inf> lab2_mesh: Thread role: leader
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset active -x\n" ----
+ot dataset active -x
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot neighbor table\n" ----
+ot neighbor table
+| Role | RLOC16 | Age | Avg RSSI | Last RSSI | LQ In |R|D|N| Extended MAC     | Version |
++------+--------+-----+----------+-----------+-------+-+-+-+------------------+---------+
+|   C  | 0xa002 | 147 |      -80 |       -76 |     2 |1|1|1| a233d62c27272728 |       2 |
+|   R  | 0x7000 |   8 |      -76 |       -75 |     3 |1|1|1| 36a9c06d2ab7de72 |       2 |
+
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot extaddr\n" ----
+ot extaddr
+ae474c5541424242
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot macfilter rss add-lqi a233d62c27272728 1\n" ----
+ot macfilter rss add-lqi a233d62c27272728 1
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 20 0.5\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 20 0.5
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=1 hlim=64 time=33ms
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=4 hlim=64 time=32ms
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=5 hlim=64 time=32ms
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=8 hlim=64 time=32ms
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=9 hlim=64 time=32ms
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=10 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=11 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=13 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=15 hlim=64 time=32m
+20 packets transmitted, 9 packets received. Packet loss = 55.0%. Round-trip min/avg/max = 32/32.111/33 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b 64 20 0.5\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b 64 20 0.5
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=22 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=23 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=24 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=25 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=26 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=27 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=28 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=29 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=30 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=31 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=32 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=33 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=34 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=35 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=36 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=37 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=38 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=39 hlim=64 time=16msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b: icmp_seq=40 hlim=64 time=16msuart:~$
+
+20 packets transmitted, 19 packets received. Packet loss = 5.0%. Round-trip min/avg/max = 16/16.000/16 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 20 0.5\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 20 0.5
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=42 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=43 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=44 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=46 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=47 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=48 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=49 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=51 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=52 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=53 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=54 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=55 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=56 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=57 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=58 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=59 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=60 hlim=64 time=32m
+20 packets transmitted, 17 packets received. Packet loss = 15.0%. Round-trip min/avg/max = 32/32.000/32 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 200 1\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 200 1
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=61 hlim=64 time=33m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=62 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=65 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=66 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=67 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=70 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=71 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=72 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=73 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=74 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=75 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=76 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=77 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=78 hlim=64 time=32m
+72 bytes from fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80: icmp_seq=79 hlim=64 time=32m
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 200 1\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:1586:609a:c9f:7a80 64 200 1
+200 packets transmitted, 15 packets received. Packet loss = 92.5%. Round-trip min/avg/max = 32/32.066/33 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot txpower\n" ----
+ot txpower
+0 dBm
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot txpower 20\n" ----
+ot txpower 20
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset active -x\n" ----
+ot dataset active -x
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot txpower\n" ----
+ot txpower
+20 dBm
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot extaddr\n" ----
+ot extaddr
+ae474c5541424242
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fd8d:8d8e:8e06:9bf2:52bb:b1a8:cece:cecf
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot neighbor table\n" ----
+ot neighbor table
+| Role | RLOC16 | Age | Avg RSSI | Last RSSI | LQ In |R|D|N| Extended MAC     | Version |
++------+--------+-----+----------+-----------+-------+-+-+-+------------------+---------+
+|   R  | 0x7000 |   3 |      -64 |       -63 |     3 |1|1|1| 36a9c06d2ab7de72 |       2 |
+|   R  | 0x8000 |   4 |      -78 |       -75 |     2 |1|1|1| be150f1cb31b0115 |       2 |
+
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot macfilter rss add-lqi be150f1cb31b0115 1\n" ----
+ot macfilter rss add-lqi be150f1cb31b0115 1
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0 64 20 0.5\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0 64 20 0.5
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=262 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=263 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=264 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=265 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=266 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=267 hlim=64 time=31msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=268 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=269 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=270 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=271 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=272 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=273 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=274 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=275 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=276 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=277 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=278 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=279 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=280 hlim=64 time=32msuart:~$
+
+20 packets transmitted, 19 packets received. Packet loss = 5.0%. Round-trip min/avg/max = 31/31.947/32 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0 64 200 1\n" ----
+ot ping fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0 64 200 1
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=281 hlim=64 time=33msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=282 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=283 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=284 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=285 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=286 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=288 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=289 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=290 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=291 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=292 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=293 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=294 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=295 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=296 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=297 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=298 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=299 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=300 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=301 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=302 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=303 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=304 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=305 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=306 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=307 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=308 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=309 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=310 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=311 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=312 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=313 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=314 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=315 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=316 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=317 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=318 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=319 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=320 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=321 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=322 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=323 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=324 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=325 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=326 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=327 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=328 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=329 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=330 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=331 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=332 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=333 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=334 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=335 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=336 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=337 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=338 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=339 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=340 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=341 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=342 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=343 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=344 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=345 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=346 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=347 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=348 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=349 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=350 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=351 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=352 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=353 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=354 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=355 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=356 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=357 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=358 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=359 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=360 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=361 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=362 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=363 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=364 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=365 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=366 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=367 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=368 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=369 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=370 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=371 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=372 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=373 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=374 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=375 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=376 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=377 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=378 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=379 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=380 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=381 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=382 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=383 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=386 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=387 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=389 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=390 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=391 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=392 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=393 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=394 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=395 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=396 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=397 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=398 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=400 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=401 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=402 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=403 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=406 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=407 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=408 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=409 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=410 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=411 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=412 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=413 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=414 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=415 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=416 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=417 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=418 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=419 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=420 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=421 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=422 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=423 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=424 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=425 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=426 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=427 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=428 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=429 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=430 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=431 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=432 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=433 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=434 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=435 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=436 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=437 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=438 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=439 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=440 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=441 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=442 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=444 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=445 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=446 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=447 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=448 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=449 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=450 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=451 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=452 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=453 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=454 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=455 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=456 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=457 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=458 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=459 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=460 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=461 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=462 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=463 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=464 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=465 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=466 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=467 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=468 hlim=64 time=38msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=469 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=470 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=471 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=472 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=473 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=474 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=475 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=476 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=477 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=478 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=479 hlim=64 time=32msuart:~$
+
+72 bytes from fd8d:8d8e:8e06:9bf2:f35b:8296:8a1:bba0: icmp_seq=480 hlim=64 time=32msuart:~$
+
+200 packets transmitted, 192 packets received. Packet loss = 4.0%. Round-trip min/avg/max = 32/32.036/38 ms.
+Done
+uart:~$

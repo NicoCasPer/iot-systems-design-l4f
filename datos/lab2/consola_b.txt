@@ -1,0 +1,90 @@
+placa B
+
+---- Opened the serial port /dev/ttyACM1 ----
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+disabled
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:07:49.401,000] <inf> lab2_mesh: Thread role: detached
+[00:08:17.231,000] <inf> lab2_mesh: Thread role: child
+[00:08:23.216,000] <inf> lab2_mesh: Thread role: router
+uart:~$ ��������
+                ����<������������&@���p��������80� ������� 0�@��
+                                                                ����~����������" � �@�H����>�����
+     �q��?���
+             ��p������������1����������`��p@�����@��8@����������0�U���?�����������
+---- Sent utf8 encoded message: "\n" ----
+
+uart:~$ 
+---- Sent utf8 encoded message: "ot counters mac reset\n" ----
+ot counters mac reset
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot counters mac\n" ----
+ot counters mac
+TxTotal: 40
+    TxUnicast: 29
+    TxBroadcast: 11
+    TxAckRequested: 29
+    TxAcked: 29
+    TxNoAckRequested: 11
+    TxData: 40
+    TxDataPoll: 0
+    TxBeacon: 0
+    TxBeaconRequest: 0
+    TxOther: 0
+    TxRetry: 0
+    TxErrCca: 0
+    TxErrBusyChannel: 0
+    TxErrAbort: 0
+    TxDirectMaxRetryExpiry: 0
+    TxIndirectMaxRetryExpiry: 0
+RxTotal: 37
+    RxUnicast: 29
+    RxBroadcast: 8
+    RxData: 37
+    RxDataPoll: 0
+    RxBeacon: 0
+    RxBeaconRequest: 0
+    RxOther: 0
+    RxAddressFiltered: 0
+    RxDestAddrFiltered: 0
+    RxDuplicated: 0
+    RxErrNoFrame: 0
+    RxErrNoUnknownNeighbor: 0
+    RxErrInvalidSrcAddr: 0
+    RxErrSec: 0
+    RxErrFcs: 0
+    RxErrOther: 0
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fd8d:8d8e:8e06:9bf2:df42:2b86:d548:268b
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot txpower\n" ----
+ot txpower
+0 dBm
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot txpower 20\n" ----
+ot txpower 20
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot txpower\n" ----
+ot txpower
+20 dBm
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot counters mac reset\n" ----
+ot counters mac reset
+Done

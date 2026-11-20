@@ -1,0 +1,269 @@
+PLACA S:
+
+
+
+
+
+---- Sent utf8 encoded message: "ot factoryreset\n" ----
+ot factoryreset
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0xc (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4200df82
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0x13038
+load:0x40813050,len:0x3a2c
+SHA-256 comparison failed:
+Calculated: 8c6a33661fe97acce6ab179d6ae5efcc9d10e0ed6052abc0887d5c04538a968a
+Expected: 0000000060950000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40800294
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 13:48:56
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=13038h ( 77880)
+I (boot): DRAM  : lma=00013060h vma=40813050h size=03a2ch ( 14892)
+I (boot): DROM  : lma=00020000h vma=42800000h size=0e604h ( 58884)
+I (boot): IROM  : lma=00030000h vma=42000000h size=64c60h (412768)
+I (boot): libc heap size 308 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.
+PHY: libbtbb version: e4897a5, Apr 10 2026, 13:53:26
+
+[00:00:00.074,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.093,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.093,000] <inf> fs_nvs: alloc wra: 2, e88
+[00:00:00.093,000] <inf> fs_nvs: data wra: 2, 284
+[00:00:00.100,000] <inf> ieee802154_esp32: Iface initialized
+*** Booting Zephyr OS build v4.4.0-14199-g4c6971ba90a3 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.101,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.102,000] <inf> lab4_sensors: SoilSense node ready: CoAP /env/temp (ds18b20) and /act/valve on UDP 5683. OpenThread commands start with "ot".
+[00:00:00.102,000] <inf> reading: Reading ds18b20 every 2 s
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset set active <redactado>\n" ----
+ot dataset set active <redactado>
+<redactado>
+<redactado>
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:02:06.033,000] <inf> lab4_sensors: Thread role: detached
+[00:02:08.311,000] <inf> lab4_sensors: Thread role: child
+uart:~$ 
+---- Sent utf8 encoded message: "ot ipaddr mleid\n" ----
+ot ipaddr mleid
+fd8e:8e8e:8f98:9898:cd7e:da6f:e819:ceb6
+Done
+[00:02:38.903,000] <inf> lab4_sensors: Thread role: router
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense stats\n" ----
+soilsense stats
+sensor:    ds18b20
+last good: 24.75 C, 0 s ago
+reads:     90 in 178 s: 0 failed (0.0 %), 0 rejected
+read time: min 760653 us, avg 760878 us, max 779203 us
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log on \n" ----
+soilsense log on 
+[00:03:28.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:30.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:32.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:34.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:36.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:38.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:40.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:42.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:44.862,000] <inf> reading: ds18b20: 24.88 C
+[00:03:46.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:48.862,000] <inf> reading: ds18b20: 24.81 C
+[00:03:50.862,000] <inf> reading: ds18b20: 24.69 C
+[00:03:52.862,000] <inf> reading: ds18b20: 24.69 C
+[00:03:54.862,000] <inf> reading: ds18b20: 24.62 C
+[00:03:56.862,000] <inf> reading: ds18b20: 24.69 C
+[00:03:58.862,000] <inf> reading: ds18b20: 24.69 C
+[00:04:00.862,000] <inf> reading: ds18b20: 24.75 C
+[00:04:02.862,000] <inf> reading: ds18b20: 24.88 C
+[00:04:04.862,000] <inf> reading: ds18b20: 24.81 C
+[00:04:06.862,000] <inf> reading: ds18b20: 24.88 C
+[00:04:08.862,000] <inf> reading: ds18b20: 25.75 C
+[00:04:10.862,000] <inf> reading: ds18b20: 26.50 C
+[00:04:12.862,000] <inf> reading: ds18b20: 27.06 C
+[00:04:14.862,000] <inf> reading: ds18b20: 27.12 C
+[00:04:16.862,000] <inf> reading: ds18b20: 27.06 C
+[00:04:18.862,000] <inf> reading: ds18b20: 26.88 C
+[00:04:20.862,000] <inf> reading: ds18b20: 26.75 C
+[00:04:22.862,000] <inf> reading: ds18b20: 26.56 C
+[00:04:24.862,000] <inf> reading: ds18b20: 26.38 C
+[00:04:26.862,000] <inf> reading: ds18b20: 26.19 C
+[00:04:28.862,000] <inf> reading: ds18b20: 26.12 C
+[00:04:30.862,000] <inf> reading: ds18b20: 25.88 C
+[00:04:32.862,000] <inf> reading: ds18b20: 25.75 C
+[00:04:34.862,000] <inf> reading: ds18b20: 25.62 C
+[00:04:36.862,000] <inf> reading: ds18b20: 25.56 C
+[00:04:38.862,000] <inf> reading: ds18b20: 25.50 C
+[00:04:40.862,000] <inf> reading: ds18b20: 25.44 C
+[00:04:42.862,000] <inf> reading: ds18b20: 25.31 C
+[00:04:44.862,000] <inf> reading: ds18b20: 25.38 C
+[00:04:46.862,000] <inf> reading: ds18b20: 25.31 C
+[00:04:48.862,000] <inf> reading: ds18b20: 25.44 C
+[00:04:50.862,000] <inf> reading: ds18b20: 26.00 C
+[00:04:52.862,000] <inf> reading: ds18b20: 26.19 C
+[00:04:54.862,000] <inf> reading: ds18b20: 26.19 C
+[00:04:56.862,000] <inf> reading: ds18b20: 26.06 C
+[00:04:58.862,000] <inf> reading: ds18b20: 25.94 C
+[00:05:00.862,000] <inf> reading: ds18b20: 25.81 C
+[00:05:02.862,000] <inf> reading: ds18b20: 25.69 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log off\n" ----
+soilsense log off
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log on\n" ----
+soilsense log on
+[00:05:42.862,000] <inf> reading: ds18b20: 25.12 C
+[00:05:44.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:46.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:48.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:50.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:52.863,000] <inf> reading: ds18b20: 25.06 C
+[00:05:54.862,000] <inf> reading: ds18b20: 25.06 C
+[00:05:56.855,000] <err> reading: ds18b20 was not found at boot; fix the wiring, then reset the board
+[00:05:58.102,000] <wrn> reading: Read failed (-19) after 972 us
+[00:06:00.102,000] <err> reading: Sensor lost: 3 failed reads in a row; retrying every 2 s
+[00:06:20.862,000] <inf> reading: Sensor back after 12 failed reads
+[00:06:20.862,000] <inf> reading: ds18b20: 25.19 C
+[00:06:22.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:24.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:26.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:28.862,000] <inf> reading: ds18b20: 25.25 C
+[00:06:30.862,000] <inf> reading: ds18b20: 25.31 C
+[00:06:32.862,000] <inf> reading: ds18b20: 25.31 C
+[00:06:34.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:36.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:38.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:40.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:42.862,000] <inf> reading: ds18b20: 25.44 C
+[00:06:44.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:46.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:48.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:50.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:52.862,000] <inf> reading: ds18b20: 25.38 C
+[00:06:54.862,000] <inf> reading: ds18b20: 25.44 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log off\n" ----
+soilsense log off
+[00:06:56.862,000] <inf> reading: ds18b20: 25.44 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense reset\n" ----
+soilsense reset
+Counters zeroed
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense stats\n" ----
+soilsense stats
+sensor:    ds18b20
+last good: 25.06 C, 1 s ago
+reads:     4 in 9 s: 0 failed (0.0 %), 0 rejected
+read time: min 760653 us, avg 760670 us, max 760701 us
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log on\n" ----
+soilsense log on
+[00:08:12.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:14.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:16.863,000] <inf> reading: ds18b20: 25.19 C
+[00:08:18.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:20.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:22.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:24.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:26.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:28.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:30.863,000] <inf> reading: ds18b20: 25.12 C
+[00:08:32.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:34.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:36.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:38.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:40.862,000] <inf> reading: ds18b20: 25.19 C
+[00:08:42.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:44.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:46.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:48.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:50.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:52.862,000] <inf> reading: ds18b20: 25.12 C
+[00:08:54.862,000] <inf> reading: ds18b20: 25.06 C
+[00:08:56.862,000] <inf> reading: ds18b20: 25.06 C
+[00:08:58.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:00.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:02.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:04.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:06.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:08.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:10.862,000] <inf> reading: ds18b20: 25.12 C
+[00:09:12.862,000] <inf> reading: ds18b20: 25.12 C
+[00:09:14.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:16.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:18.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:20.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:22.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:24.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:26.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:28.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:30.862,000] <inf> reading: ds18b20: 25.06 C
+[00:09:32.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:34.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:36.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:38.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:40.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:42.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:44.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:46.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:48.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:50.862,000] <inf> reading: ds18b20: 24.94 C
+[00:09:52.862,000] <inf> reading: ds18b20: 24.94 C
+[00:09:54.862,000] <inf> reading: ds18b20: 24.94 C
+[00:09:56.862,000] <inf> reading: ds18b20: 25.00 C
+[00:09:58.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:00.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:02.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:04.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:06.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:08.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:10.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:12.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:14.862,000] <inf> reading: ds18b20: 24.94 C
+[00:10:16.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:18.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:20.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:22.862,000] <inf> reading: ds18b20: 25.00 C
+[00:10:24.862,000] <inf> reading: ds18b20: 25.25 C
+[00:10:26.862,000] <inf> reading: ds18b20: 25.69 C
+[00:10:28.862,000] <inf> reading: ds18b20: 26.19 C
+[00:10:30.862,000] <inf> reading: ds18b20: 26.44 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense stats\n" ----
+soilsense stats
+sensor:    ds18b20
+last good: 26.50 C, 0 s ago
+reads:     84 in 167 s: 0 failed (0.0 %), 0 rejected
+read time: min 760653 us, avg 760707 us, max 760956 us
+[00:10:32.862,000] <inf> reading: ds18b20: 26.50 C
+[00:10:34.862,000] <inf> reading: ds18b20: 26.44 C
+[00:10:36.862,000] <inf> reading: ds18b20: 26.31 C
+[00:10:38.862,000] <inf> reading: ds18b20: 26.19 C
+[00:10:40.862,000] <inf> reading: ds18b20: 26.06 C
+[00:10:42.862,000] <inf> reading: ds18b20: 26.00 C
+[00:10:44.862,000] <inf> reading: ds18b20: 25.88 C
+uart:~$ 
+---- Sent utf8 encoded message: "soilsense log off\n" ----
+soilsense log off
+uart:~$

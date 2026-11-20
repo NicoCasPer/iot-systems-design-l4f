@@ -24,6 +24,8 @@ Esta copia recoge el estado disponible del workspace; no es un historial de vers
 
 [`manifest/west.yml`](manifest/west.yml) conserva el manifiesto del workspace y fija Zephyr al commit `2f0bc11264a8e72e214f3db0a3fa221eb022453a`. El workspace consultado tiene Zephyr en esa revisión. Los builds existentes del OTBR y el RCP registran **Zephyr SDK 1.0.1**, con toolchains Xtensa ESP32-S3 y RISC-V ESP32-C6.
 
+Las [transcripciones originales](../datos/README.md) de los Labs 3–4 registran otros builds históricos: S imprime `v4.4.0-14199-g4c6971ba90a3` y C imprime `v4.4.2`. El manifiesto copiado describe el workspace disponible y los builds del OTBR; no identifica por sí solo la revisión de todas las imágenes usadas en esas sesiones anteriores.
+
 Para preparar un clon nuevo, desde la raíz del repositorio:
 
 ```bash

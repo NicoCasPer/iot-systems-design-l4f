@@ -17,7 +17,7 @@ Repositorio del equipo para **Desarrollo de Sistemas IoT** (4201327), Universida
 | [`ddr/labs1-4_pareja2/`](ddr/labs1-4_pareja2/DDR.md) | DDR de la pareja 2, labs 1–4 |
 | [`ddr/labs5-8_equipo/`](ddr/labs5-8_equipo/DDR.md) | DDR del equipo completo, labs 5–8 |
 | [`firmware/`](firmware/README.md) | Código y configuraciones de los labs 0–5, herramientas y dependencias de Zephyr |
-| [`datos/`](datos/README.md) | Registro de consola y notas disponibles del Lab 5, con procedencia y fechas |
+| [`datos/`](datos/README.md) | Transcripciones y consolas de Labs 1–5, lecturas del sensor en CSV y procedencia |
 | [`presentacion_lorawan/`](presentacion_lorawan/) | Presentación sobre LoRaWAN (13-nov-2026) |
 | [`proyecto_final/`](proyecto_final/) | Business case y pitch final |
 

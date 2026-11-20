@@ -1,0 +1,393 @@
+PLACA C:
+
+
+
+
+---- Opened the serial port /dev/tty.usbmodem5CBC0028321 ----
+---- Sent utf8 encoded message: "  ot factoryreset\n" ----
+  ot factoryreset
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0x1c (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4200ce1a
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0xf1c4
+load:0x4080f1e0,len:0x388c
+SHA-256 comparison failed:
+Calculated: 07f49d7ccbcb1cb7d462310ffa99cd0e22775db812a2f428855be52a918c88ff
+Expected: 0000000070d50000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40803240
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 10:57:28
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=0f1c4h ( 61892)
+I (boot): DRAM  : lma=0000f1ech vma=4080f1e0h size=0388ch ( 14476)
+I (boot): IROM  : lma=00020000h vma=42800000h size=0ca64h ( 51812)
+I (boot): IROM  : lma=00030000h vma=42000000h size=64200h (410112)
+I (boot): libc heap size 330 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(4096k) smaller than the size in the binary image header(8192k). Using detected size.
+PHY: libbtbb version: c493933, Nov 14 2025, 16:34:25
+
+[00:00:00.079,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.106,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.106,000] <inf> fs_nvs: alloc wra: 0, d38
+[00:00:00.106,000] <inf> fs_nvs: data wra: 0, 5f4
+*** Booting Zephyr OS build v4.4.2 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.120,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.121,000] <inf> lab3_coap: SoilSense node ready: CoAP /env/temp and /act/valve on UDP 5683. OpenThread commands start with "ot".
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset init new\n" ----
+ot dataset init new
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset commit active\n" ----
+ot dataset commit active
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:08:10.950,000] <inf> lab3_coap: Thread role: detached
+[00:08:13.065,000] <inf> lab3_coap: Thread role: leader
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset active -x\n" ----
+ot dataset active -x
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap start\n" ----
+ot coap start
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap get fda6:239b:22f7:f7f8:df42:2b86:d548:268b env/temp\n" ----
+ot coap get fda6:239b:22f7:f7f8:df42:2b86:d548:268b env/temp
+Done
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b with payload: a16174f94e33
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap observe fda6:239b:22f7:f7f8:df42:2b86:d548:268b env/temp\n" ----
+ot coap observe fda6:239b:22f7:f7f8:df42:2b86:d548:268b env/temp
+Done
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=2 with payload: a16174f94e24
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=3 with payload: a16174f94dfe
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=4 with payload: a16174f94ddb
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=5 with payload: a16174f94dfc
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=6 with payload: a16174f94e20
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=7 with payload: a16174f94e46
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=8 with payload: a16174f94e1d
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=9 with payload: a16174f94dfd
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=10 with payload: a16174f94ddb
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=11 with payload: a16174f94e07
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=12 with payload: a16174f94e27
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=13 with payload: a16174f94e48
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=14 with payload: a16174f94e1e
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=15 with payload: a16174f94dfd
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=16 with payload: a16174f94ddc
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=17 with payload: a16174f94e05
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=18 with payload: a16174f94e29
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=19 with payload: a16174f94e4c
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=20 with payload: a16174f94e27
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=21 with payload: a16174f94e04
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=22 with payload: a16174f94dde
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=23 with payload: a16174f94e00
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=24 with payload: a16174f94e26
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=25 with payload: a16174f94e49
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=26 with payload: a16174f94e28
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=27 with payload: a16174f94e03
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=28 with payload: a16174f94de0
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=29 with payload: a16174f94e07
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=30 with payload: a16174f94e27
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=31 with payload: a16174f94e4e
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=32 with payload: a16174f94e2b
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=33 with payload: a16174f94e03
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=34 with payload: a16174f94de0
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=35 with payload: a16174f94e0b
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b OBS=36 with payload: a16174f94e2f
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap cancel\n" ----
+ot coap cancel
+Done
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b with payload: a16174f94e38
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1
+Done
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b with payload: a1617601
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap get fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve\n" ----
+ot coap get fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve
+Done
+coap response from fda6:239b:22f7:f7f8:df42:2b86:d548:268b with payload: a1617601
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0
+Done
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0
+Done
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1
+Done
+coap receive response error 28: ResponseTimeout
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 0
+Done
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b\n" ----
+ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+1 packets transmitted, 0 packets received. Packet loss = 100.0%.
+Done
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1\n" ----
+ot coap put fda6:239b:22f7:f7f8:df42:2b86:d548:268b act/valve con 1
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot neighbor table\n" ----
+ot neighbor table
+| Role | RLOC16 | Age | Avg RSSI | Last RSSI | LQ In |R|D|N| Extended MAC     | Version |
++------+--------+-----+----------+-----------+-------+-+-+-+------------------+---------+
+|   R  | 0x7000 |  16 |      -98 |      -103 |     0 |1|1|1| 36a9c06d2ab7de72 |       2 |
+
+Done
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b\n" ----
+ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+1 packets transmitted, 0 packets received. Packet loss = 100.0%.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot neighbor table\n" ----
+ot neighbor table
+| Role | RLOC16 | Age | Avg RSSI | Last RSSI | LQ In |R|D|N| Extended MAC     | Version |
++------+--------+-----+----------+-----------+-------+-+-+-+------------------+---------+
+|   C  | 0x1802 |  47 |      -97 |      -100 |     1 |1|1|1| 36a9c06d2ab7de72 |       2 |
+
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot neighbor table\n" ----
+ot neighbor table
+| Role | RLOC16 | Age | Avg RSSI | Last RSSI | LQ In |R|D|N| Extended MAC     | Version |
++------+--------+-----+----------+-----------+-------+-+-+-+------------------+---------+
+|   C  | 0x1802 |  60 |      -97 |      -100 |     1 |1|1|1| 36a9c06d2ab7de72 |       2 |
+
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b\n" ----
+ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+1 packets transmitted, 0 packets received. Packet loss = 100.0%.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot factoryreset\n" ----
+ot factoryreset
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0x1c (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4001975a
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40800000,len:0xf1c4
+load:0x4080f1e0,len:0x388c
+SHA-256 comparison failed:
+Calculated: 07f49d7ccbcb1cb7d462310ffa99cd0e22775db812a2f428855be52a918c88ff
+Expected: 0000000070d50000000000000000000000000000000000000000000000000000
+Attempting to boot anyway...
+entry 0x40803240
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 22 2026 10:57:28
+I (soc_init): chip revision: v0.2
+I (flash_init): SPI Speed      : 80MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 8MB
+I (boot): DRAM  : lma=00000020h vma=40800000h size=0f1c4h ( 61892)
+I (boot): DRAM  : lma=0000f1ech vma=4080f1e0h size=0388ch ( 14476)
+I (boot): IROM  : lma=00020000h vma=42800000h size=0ca64h ( 51812)
+I (boot): IROM  : lma=00030000h vma=42000000h size=64200h (410112)
+I (boot): libc heap size 330 kB.
+I (spi_flash): detected chip: boya
+I (spi_flash): flash io: dio
+W (spi_flash): Detected size(4096k) smaller than the size in the binary image header(8192k). Using detected size.
+PHY: libbtbb version: c493933, Nov 14 2025, 16:34:25
+
+[00:00:00.081,000] <inf> ieee802154_esp32: IEEE 802154 radio initialized
+[00:00:00.103,000] <inf> fs_nvs: 8 Sectors of 4096 bytes
+[00:00:00.103,000] <inf> fs_nvs: alloc wra: 0, b98
+[00:00:00.103,000] <inf> fs_nvs: data wra: 0, 8fc
+*** Booting Zephyr OS build v4.4.2 ***
+WARNING: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.116,000] <wrn> secure_storage: Using a potentially insecure PSA ITS encryption key provider.
+[00:00:00.117,000] <inf> lab3_coap: SoilSense node ready: CoAP /env/temp and /act/valve on UDP 5683. OpenThread commands start with "ot".
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset init new\n" ----
+ot dataset init new
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset channel 26\n" ----
+ot dataset channel 26
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset commit active\n" ----
+ot dataset commit active
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ifconfig up\n" ----
+ot ifconfig up
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot thread start\n" ----
+ot thread start
+Done
+[00:00:28.616,000] <inf> lab3_coap: Thread role: detached
+[00:00:31.161,000] <inf> lab3_coap: Thread role: leader
+uart:~$ 
+---- Sent utf8 encoded message: "ot dataset active -x\n" ----
+ot dataset active -x
+<redactado>
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot neighbor table\n" ----
+ot neighbor table
+| Role | RLOC16 | Age | Avg RSSI | Last RSSI | LQ In |R|D|N| Extended MAC     | Version |
++------+--------+-----+----------+-----------+-------+-+-+-+------------------+---------+
+|   R  | 0x5c00 |   0 |      -66 |       -65 |     3 |1|1|1| 7edd1db4e83b5061 |       2 |
+
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b\n" ----
+ot ping fda6:239b:22f7:f7f8:df42:2b86:d548:268b
+1 packets transmitted, 0 packets received. Packet loss = 100.0%.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101\n" ----
+ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101
+1 packets transmitted, 0 packets received. Packet loss = 100.0%.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Error 13: InvalidState
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Error 13: InvalidState
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap start\n" ----
+ot coap start
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Done
+coap response from fd11:942f:9664:6464:9045:59d0:b2ab:6101 with payload: a1617601
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap get fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve\n" ----
+ot coap get fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve
+Done
+coap response from fd11:942f:9664:6464:9045:59d0:b2ab:6101 with payload: a1617601
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 0\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 0
+Done
+coap response from fd11:942f:9664:6464:9045:59d0:b2ab:6101 with payload: a1617600
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1 ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1 ot c
+oap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Done
+coap response from fd11:942f:9664:6464:9045:59d0:b2ab:6101 with payload: a1617601
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 7\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 7
+Done
+coap receive response error 28: ResponseTimeout
+coap response from fd11:942f:9664:6464:9045:59d0:b2ab:6101
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Done
+coap receive response error 28: ResponseTimeout
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve non-con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve non-con 1
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot state\n" ----
+ot state
+leader
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101 16 10 1.3 64 40\n" ----
+ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101 16 10 1.3 64 40
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=3 hlim=64 time=454ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=4 hlim=64 time=142ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=5 hlim=64 time=844ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=6 hlim=64 time=545ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=7 hlim=64 time=246ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=8 hlim=64 time=948ms
+10 packets transmitted, 6 packets received. Packet loss = 40.0%. Round-trip min/avg/max = 142/529.833/948 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101 16 10 1.3 64 40\n" ----
+ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101 16 10 1.3 64 40
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=13 hlim=64 time=1294ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=14 hlim=64 time=4988ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=15 hlim=64 time=3715ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=16 hlim=64 time=2523ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=18 hlim=64 time=4939ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=19 hlim=64 time=3666ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=20 hlim=64 time=2393ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=21 hlim=64 time=1110ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=22 hlim=64 time=4776ms
+10 packets transmitted, 9 packets received. Packet loss = 10.0%. Round-trip min/avg/max = 1110/3267.111/4988 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101 16 10 1.3 64 40\n" ----
+ot ping fd11:942f:9664:6464:9045:59d0:b2ab:6101 16 10 1.3 64 40
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=23 hlim=64 time=13368ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=24 hlim=64 time=12093ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=25 hlim=64 time=10820ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=26 hlim=64 time=9551ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=27 hlim=64 time=8278ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=28 hlim=64 time=7005ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=29 hlim=64 time=5732ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=30 hlim=64 time=4463ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=31 hlim=64 time=3194ms
+24 bytes from fd11:942f:9664:6464:9045:59d0:b2ab:6101: icmp_seq=32 hlim=64 time=1912ms
+10 packets transmitted, 10 packets received. Packet loss = 0.0%. Round-trip min/avg/max = 1912/7641.600/13368 ms.
+Done
+uart:~$ 
+---- Sent utf8 encoded message: "ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1\n" ----
+ot coap put fd11:942f:9664:6464:9045:59d0:b2ab:6101 act/valve con 1
+Done
+coap response from fd11:942f:9664:6464:9045:59d0:b2ab:6101 with payload: a1617601
+uart:~$ 
